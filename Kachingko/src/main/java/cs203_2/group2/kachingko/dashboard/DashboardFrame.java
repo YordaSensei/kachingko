@@ -3,7 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package cs203_2.group2.kachingko.dashboard;
-import cs203_2.group2.kachingko.ui.RoundedButton;
+import cs203_2.group2.kachingko.auth.Session;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import cs203_2.group2.kachingko.DBConnection;
 /**
  *
  * @author jeffm
@@ -18,7 +24,33 @@ public class DashboardFrame extends javax.swing.JFrame {
         setSize(460, 655);
         setResizable(false);
         setLocationRelativeTo(null);
+        
+        displayCurrentUsername();
     }
+    
+    private void displayCurrentUsername() {
+    try (Connection conn = DBConnection.getConnection()) {
+        String query = "SELECT username FROM users WHERE id = ?";
+        PreparedStatement stmt = conn.prepareStatement(query);
+//        stmt.setInt(1, Session.currentUserId); // gets currrent user id from database 
+        stmt.setInt(1, 1); //temporary id for testing
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            String username = rs.getString("username");
+            userLabel.setText(username);
+        } else {
+            userLabel.setText("User not found.");
+        }
+
+        rs.close();
+        stmt.close();
+    } catch (Exception e) {
+        userLabel.setText("Error retrieving user.");
+        e.printStackTrace();
+    }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,6 +71,8 @@ public class DashboardFrame extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        usernameHeader = new javax.swing.JLabel();
+        userLabel = new javax.swing.JLabel();
         budgetPlannerBtn = new javax.swing.JButton();
         menuBtn = new javax.swing.JButton();
         monthlySpendingBtn = new javax.swing.JButton();
@@ -129,6 +163,19 @@ public class DashboardFrame extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(50, 250, 140, 19);
 
+        usernameHeader.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        usernameHeader.setText("Welcome, User:");
+        usernameHeader.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        usernameHeader.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        getContentPane().add(usernameHeader);
+        usernameHeader.setBounds(60, 130, 120, 19);
+
+        userLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        userLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        userLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        getContentPane().add(userLabel);
+        userLabel.setBounds(180, 130, 220, 19);
+
         budgetPlannerBtn.setBackground(new java.awt.Color(55, 74, 34));
         budgetPlannerBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         budgetPlannerBtn.setForeground(new java.awt.Color(242, 242, 242));
@@ -165,6 +212,11 @@ public class DashboardFrame extends javax.swing.JFrame {
         spendingTrendlineBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         spendingTrendlineBtn.setForeground(new java.awt.Color(242, 242, 242));
         spendingTrendlineBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        spendingTrendlineBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                spendingTrendlineBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(spendingTrendlineBtn);
         spendingTrendlineBtn.setBounds(40, 380, 170, 130);
 
@@ -189,6 +241,10 @@ public class DashboardFrame extends javax.swing.JFrame {
     private void menuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuBtnActionPerformed
+
+    private void spendingTrendlineBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spendingTrendlineBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_spendingTrendlineBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,5 +298,7 @@ public class DashboardFrame extends javax.swing.JFrame {
     private javax.swing.JButton menuBtn;
     private javax.swing.JButton monthlySpendingBtn;
     private javax.swing.JButton spendingTrendlineBtn;
+    private javax.swing.JLabel userLabel;
+    private javax.swing.JLabel usernameHeader;
     // End of variables declaration//GEN-END:variables
 }

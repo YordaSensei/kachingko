@@ -1,5 +1,5 @@
 package cs203_2.group2.kachingko.auth;
-
+import cs203_2.group2.kachingko.dashboard.DashboardFrame;
 import cs203_2.group2.kachingko.DBConnection;
 import cs203_2.group2.kachingko.ui.uploadCSV;
 import java.sql.*;
@@ -138,7 +138,7 @@ public class login extends javax.swing.JFrame {
                 if (count == 0) {
                     new uploadCSV().setVisible(true);
                 } else {
-                    new cs203_2.group2.kachingko.ui.Dashboard().setVisible(true);
+                     new DashboardFrame().setVisible(true);
                 }
 
                 this.dispose();
