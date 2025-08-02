@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package cs203_2.group2.kachingko.dashboard;
+import cs203_2.group2.kachingko.dashboard.SpendingTrendline.SpendingTrendline;
 import cs203_2.group2.kachingko.auth.Session;
 
 import java.sql.Connection;
@@ -164,17 +165,17 @@ public class DashboardFrame extends javax.swing.JFrame {
         jLabel1.setBounds(50, 250, 140, 19);
 
         usernameHeader.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        usernameHeader.setText("Welcome, User:");
+        usernameHeader.setText("Welcome,");
         usernameHeader.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         usernameHeader.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(usernameHeader);
-        usernameHeader.setBounds(60, 130, 120, 19);
+        usernameHeader.setBounds(60, 130, 72, 19);
 
         userLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         userLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         userLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(userLabel);
-        userLabel.setBounds(180, 130, 220, 19);
+        userLabel.setBounds(140, 130, 260, 19);
 
         budgetPlannerBtn.setBackground(new java.awt.Color(55, 74, 34));
         budgetPlannerBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -243,7 +244,8 @@ public class DashboardFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuBtnActionPerformed
 
     private void spendingTrendlineBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spendingTrendlineBtnActionPerformed
-        // TODO add your handling code here:
+            SpendingTrendline trendlineWindow = new SpendingTrendline();
+            trendlineWindow.setVisible(true);
     }//GEN-LAST:event_spendingTrendlineBtnActionPerformed
 
     /**
