@@ -275,15 +275,20 @@ public class menu extends javax.swing.JFrame {
         goalsBtn.setBackground(new java.awt.Color(40, 54, 24));
         goalsBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         goalsBtn.setForeground(new java.awt.Color(255, 255, 255));
-        goalsBtn.setText("MANAGE GOALS");
+        goalsBtn.setText("LOG GOALS");
         goalsBtn.setToolTipText("");
+        goalsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goalsBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(goalsBtn);
         goalsBtn.setBounds(10, 600, 207, 30);
 
         notifBtn.setBackground(new java.awt.Color(40, 54, 24));
         notifBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         notifBtn.setForeground(new java.awt.Color(255, 255, 255));
-        notifBtn.setText("Notifications");
+        notifBtn.setText("NOTIFICATIONS");
         notifBtn.setToolTipText("");
         getContentPane().add(notifBtn);
         notifBtn.setBounds(230, 600, 207, 30);
@@ -337,6 +342,13 @@ public class menu extends javax.swing.JFrame {
             loadExpenses(categoryId);
         }
     }//GEN-LAST:event_categoryTableMouseClicked
+
+    private void goalsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goalsBtnActionPerformed
+        logGoals logWindow = new logGoals();
+        logWindow.setVisible(true);
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_goalsBtnActionPerformed
 
     /**
      * @param args the command line arguments
