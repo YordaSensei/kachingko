@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import cs203_2.group2.kachingko.auth.Session;
+import cs203_2.group2.kachingko.dashboard.DashboardFrame;
 
 public class SpendingTrendline extends javax.swing.JFrame {
     
@@ -38,7 +39,7 @@ public class SpendingTrendline extends javax.swing.JFrame {
     public SpendingTrendline() {
         initComponents();
         setTitle("Spending Trendline");
-        setSize(460, 655);
+        setSize(460, 680);
         setResizable(false);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
@@ -307,15 +308,35 @@ public class SpendingTrendline extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        backBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         trendlineTable = new javax.swing.JTable();
         searchField = new javax.swing.JTextField();
         sortDropdown = new javax.swing.JComboBox<>();
+        searchLabel1 = new javax.swing.JLabel();
         searchLabel = new javax.swing.JLabel();
         trendlinesHeader = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
+        backBtn.setBackground(new java.awt.Color(40, 54, 24));
+        backBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        backBtn.setForeground(new java.awt.Color(255, 255, 255));
+        backBtn.setText("BACK TO DASHBOARD");
+        backBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(backBtn);
+        backBtn.setBounds(280, 590, 150, 30);
+
+        jScrollPane1.setForeground(new java.awt.Color(55, 74, 34));
+
+        trendlineTable.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        trendlineTable.setForeground(new java.awt.Color(55, 74, 34));
         trendlineTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -339,56 +360,53 @@ public class SpendingTrendline extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        trendlineTable.setGridColor(new java.awt.Color(55, 74, 34));
+        trendlineTable.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        trendlineTable.setSelectionForeground(new java.awt.Color(55, 74, 34));
+        trendlineTable.setShowGrid(true);
         jScrollPane1.setViewportView(trendlineTable);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(20, 150, 410, 430);
+
+        searchField.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        searchField.setForeground(new java.awt.Color(55, 74, 34));
         searchField.setToolTipText("Search");
+        searchField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
+        searchField.setCaretColor(new java.awt.Color(55, 74, 34));
         searchField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         searchField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchFieldActionPerformed(evt);
             }
         });
+        getContentPane().add(searchField);
+        searchField.setBounds(80, 120, 120, 18);
 
+        sortDropdown.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        sortDropdown.setForeground(new java.awt.Color(40, 54, 24));
         sortDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Most Expensive", "Most Common Category", "Most Frequent Merchant", "Reset" }));
+        sortDropdown.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(40, 54, 24)));
+        getContentPane().add(sortDropdown);
+        sortDropdown.setBounds(280, 120, 150, 20);
 
-        searchLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        searchLabel1.setFont(new java.awt.Font("DM Sans", 1, 14)); // NOI18N
+        searchLabel1.setForeground(new java.awt.Color(55, 74, 34));
+        searchLabel1.setText("Filter:");
+        getContentPane().add(searchLabel1);
+        searchLabel1.setBounds(230, 120, 51, 17);
+
+        searchLabel.setFont(new java.awt.Font("DM Sans", 1, 14)); // NOI18N
+        searchLabel.setForeground(new java.awt.Color(55, 74, 34));
         searchLabel.setText("Search:");
+        getContentPane().add(searchLabel);
+        searchLabel.setBounds(20, 120, 51, 17);
 
         trendlinesHeader.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        trendlinesHeader.setText("Spending Trendline");
+        trendlinesHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/trendlineBG.png"))); // NOI18N
         trendlinesHeader.setToolTipText("");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(searchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                .addComponent(sortDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(133, 133, 133)
-                .addComponent(trendlinesHeader)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(trendlinesHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sortDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE))
-        );
+        getContentPane().add(trendlinesHeader);
+        trendlinesHeader.setBounds(0, 0, 450, 660);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -396,6 +414,13 @@ public class SpendingTrendline extends javax.swing.JFrame {
     private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchFieldActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        DashboardFrame dashboardWindow = new DashboardFrame();
+        dashboardWindow.setVisible(true);
+
+        this.setVisible(false);        
+    }//GEN-LAST:event_backBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -423,9 +448,11 @@ public class SpendingTrendline extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBtn;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField searchField;
     private javax.swing.JLabel searchLabel;
+    private javax.swing.JLabel searchLabel1;
     private javax.swing.JComboBox<String> sortDropdown;
     private javax.swing.JTable trendlineTable;
     private javax.swing.JLabel trendlinesHeader;

@@ -3,6 +3,7 @@ package cs203_2.group2.kachingko.ui;
 
 import cs203_2.group2.kachingko.DBConnection;
 import cs203_2.group2.kachingko.auth.Session;
+import cs203_2.group2.kachingko.dashboard.DashboardFrame;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -12,6 +13,7 @@ import java.sql.SQLException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class uploadCSV extends javax.swing.JFrame {
     
@@ -54,7 +56,7 @@ public class uploadCSV extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(160, 390, 140, 27);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Administrator\\Desktop\\Programming\\kachingko\\Kachingko\\src\\main\\resources\\images\\upload.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/upload.png"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, -30, 460, 710);
 
@@ -63,6 +65,7 @@ public class uploadCSV extends javax.swing.JFrame {
 
     private void uploadbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadbtnActionPerformed
        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("CSV or TXT Files", "csv", "txt"));
         int result = fileChooser.showOpenDialog(this);
 
         if (result == JFileChooser.APPROVE_OPTION) {
@@ -87,23 +90,33 @@ public class uploadCSV extends javax.swing.JFrame {
 
                     if (values.length < 7) continue;
 
-                    String txnId = values[0].trim();
-                    String date = values[1].trim(); 
-                    String merchant = values[2].trim();
-                    String category = values[3].trim();
-                    double amount = Double.parseDouble(values[4].trim());
-                    String location = values[5].trim();
-                    String cardType = values[6].trim();
+                    try {
+                        String txnId = values[0].trim();
+                        String date = values[1].trim();
+                        String merchant = values[2].trim();
+                        String category = values[3].trim();
+                        double amount = Double.parseDouble(values[4].trim());
+                        String location = values[5].trim();
+                        String cardType = values[6].trim();
 
-                    insertTransaction(txnId, date, merchant, category, amount, location, cardType);
-                    count++;
+                        insertTransaction(txnId, date, merchant, category, amount, location, cardType);
+                        count++;
+
+                    } catch (NumberFormatException nfe) {
+                        logger.warning("Skipping row due to invalid amount: " + line);
+                    } catch (Exception ex) {
+                        logger.warning("Skipping row due to error: " + ex.getMessage());
+                    }
+
                 }
 
                 dialog.setVisible(false);
+                dialog.dispose();
+                
                 JOptionPane.showMessageDialog(this, "Uploaded " + count + " transactions!");
 
                 java.awt.EventQueue.invokeLater(() -> {
-                    new Dashboard().setVisible(true);
+                    new DashboardFrame().setVisible(true);
                     this.dispose();
                 });
                 
@@ -115,15 +128,18 @@ public class uploadCSV extends javax.swing.JFrame {
 
 private void insertTransaction(String txnId, String date, String merchant,
                                String category, double amount, String location, String cardType) {
-    try {
-        Connection conn = DBConnection.getConnection();
-        String sql = "INSERT INTO transactions (user_id, transaction_id, date, merchant, category, amount, location, card_type) "
-                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    String sql = "INSERT INTO transactions (user_id, transaction_id, date, merchant, category, amount, location, card_type) "
+               + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setInt(1, Session.currentUserId);  
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        java.util.Date parsedDate = new java.text.SimpleDateFormat("yyyy-MM-dd").parse(date);
+        java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
+
+        stmt.setInt(1, Session.currentUserId);
         stmt.setString(2, txnId);
-        stmt.setDate(3, java.sql.Date.valueOf(date));
+        stmt.setDate(3, sqlDate);
         stmt.setString(4, merchant);
         stmt.setString(5, category);
         stmt.setDouble(6, amount);
@@ -131,8 +147,9 @@ private void insertTransaction(String txnId, String date, String merchant,
         stmt.setString(8, cardType);
 
         stmt.executeUpdate();
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "DB Error: " + e.getMessage());
+
+    } catch (Exception e) {
+        logger.warning("DB Insert Error for txnId " + txnId + ": " + e.getMessage());
     }
 }
     public static void main(String args[]) {
