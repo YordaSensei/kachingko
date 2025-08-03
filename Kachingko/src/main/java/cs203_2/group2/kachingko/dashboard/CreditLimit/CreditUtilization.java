@@ -27,7 +27,6 @@ public class CreditUtilization extends javax.swing.JFrame {
         setSize(460, 680);
         setResizable(false);
         setLocationRelativeTo(null);
-        setLayout(new BorderLayout());
     }
 
     /**
@@ -39,7 +38,6 @@ public class CreditUtilization extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        creditUtilizationHeader = new javax.swing.JLabel();
         creditcard1 = new javax.swing.JLabel();
         creditcard2 = new javax.swing.JLabel();
         creditcard3 = new javax.swing.JLabel();
@@ -71,349 +69,331 @@ public class CreditUtilization extends javax.swing.JFrame {
         totalUtilizationTitle = new javax.swing.JLabel();
         totalUtilizationPercentage = new javax.swing.JTextField();
         dashboardBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setSize(new java.awt.Dimension(460, 655));
-
-        creditUtilizationHeader.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        creditUtilizationHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        creditUtilizationHeader.setText("Credit Limit Utilization");
-        creditUtilizationHeader.setToolTipText("");
+        getContentPane().setLayout(null);
 
         creditcard1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        creditcard1.setForeground(new java.awt.Color(55, 74, 34));
         creditcard1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        creditcard1.setText("Credit Card 1:");
+        creditcard1.setText("CARD 1:");
         creditcard1.setToolTipText("");
+        getContentPane().add(creditcard1);
+        creditcard1.setBounds(40, 140, 74, 26);
 
         creditcard2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        creditcard2.setForeground(new java.awt.Color(55, 74, 34));
         creditcard2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        creditcard2.setText("Credit Card 2:");
+        creditcard2.setText("CARD 2:");
         creditcard2.setToolTipText("");
+        getContentPane().add(creditcard2);
+        creditcard2.setBounds(40, 190, 76, 26);
 
         creditcard3.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        creditcard3.setForeground(new java.awt.Color(55, 74, 34));
         creditcard3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        creditcard3.setText("Credit Card 3:");
+        creditcard3.setText("CARD 3:");
         creditcard3.setToolTipText("");
+        getContentPane().add(creditcard3);
+        creditcard3.setBounds(40, 240, 76, 26);
 
-        balanceTitle.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        balanceTitle.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        balanceTitle.setForeground(new java.awt.Color(96, 108, 56));
         balanceTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        balanceTitle.setText("Balance");
+        balanceTitle.setText("BALANCE");
         balanceTitle.setToolTipText("");
+        getContentPane().add(balanceTitle);
+        balanceTitle.setBounds(200, 110, 80, 19);
 
-        limitTitle.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        limitTitle.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        limitTitle.setForeground(new java.awt.Color(96, 108, 56));
         limitTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        limitTitle.setText("Limit");
+        limitTitle.setText("LIMIT");
         limitTitle.setToolTipText("");
+        getContentPane().add(limitTitle);
+        limitTitle.setBounds(340, 110, 50, 20);
 
+        creditcardBalance1.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        creditcardBalance1.setForeground(new java.awt.Color(55, 74, 34));
+        creditcardBalance1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
         creditcardBalance1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditcardBalance1ActionPerformed(evt);
             }
         });
+        getContentPane().add(creditcardBalance1);
+        creditcardBalance1.setBounds(190, 140, 90, 26);
 
+        creditcardLimit1.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        creditcardLimit1.setForeground(new java.awt.Color(55, 74, 34));
+        creditcardLimit1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
         creditcardLimit1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditcardLimit1ActionPerformed(evt);
             }
         });
+        getContentPane().add(creditcardLimit1);
+        creditcardLimit1.setBounds(320, 140, 90, 26);
 
+        creditcardBalance2.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        creditcardBalance2.setForeground(new java.awt.Color(55, 74, 34));
+        creditcardBalance2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
         creditcardBalance2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditcardBalance2ActionPerformed(evt);
             }
         });
+        getContentPane().add(creditcardBalance2);
+        creditcardBalance2.setBounds(190, 190, 90, 26);
 
+        creditcardLimit2.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        creditcardLimit2.setForeground(new java.awt.Color(55, 74, 34));
+        creditcardLimit2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
         creditcardLimit2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditcardLimit2ActionPerformed(evt);
             }
         });
+        getContentPane().add(creditcardLimit2);
+        creditcardLimit2.setBounds(320, 190, 90, 26);
 
+        creditcardBalance3.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        creditcardBalance3.setForeground(new java.awt.Color(55, 74, 34));
+        creditcardBalance3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
         creditcardBalance3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditcardBalance3ActionPerformed(evt);
             }
         });
+        getContentPane().add(creditcardBalance3);
+        creditcardBalance3.setBounds(190, 240, 90, 26);
 
+        creditcardLimit3.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        creditcardLimit3.setForeground(new java.awt.Color(55, 74, 34));
+        creditcardLimit3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
         creditcardLimit3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditcardLimit3ActionPerformed(evt);
             }
         });
+        getContentPane().add(creditcardLimit3);
+        creditcardLimit3.setBounds(320, 240, 90, 26);
 
         creditcard4.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        creditcard4.setForeground(new java.awt.Color(55, 74, 34));
         creditcard4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        creditcard4.setText("Credit Card 4:");
+        creditcard4.setText("CARD 4:");
         creditcard4.setToolTipText("");
+        getContentPane().add(creditcard4);
+        creditcard4.setBounds(40, 290, 76, 26);
 
+        creditcardBalance4.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        creditcardBalance4.setForeground(new java.awt.Color(55, 74, 34));
+        creditcardBalance4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
         creditcardBalance4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditcardBalance4ActionPerformed(evt);
             }
         });
+        getContentPane().add(creditcardBalance4);
+        creditcardBalance4.setBounds(190, 290, 90, 26);
 
+        creditcardLimit4.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        creditcardLimit4.setForeground(new java.awt.Color(55, 74, 34));
+        creditcardLimit4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
         creditcardLimit4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditcardLimit4ActionPerformed(evt);
             }
         });
+        getContentPane().add(creditcardLimit4);
+        creditcardLimit4.setBounds(320, 290, 90, 26);
 
         creditcard5.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        creditcard5.setForeground(new java.awt.Color(55, 74, 34));
         creditcard5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        creditcard5.setText("Credit Card 5:");
+        creditcard5.setText("CARD 5:");
         creditcard5.setToolTipText("");
+        getContentPane().add(creditcard5);
+        creditcard5.setBounds(40, 340, 76, 26);
 
+        creditcardLimit5.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        creditcardLimit5.setForeground(new java.awt.Color(55, 74, 34));
+        creditcardLimit5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
         creditcardLimit5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditcardLimit5ActionPerformed(evt);
             }
         });
+        getContentPane().add(creditcardLimit5);
+        creditcardLimit5.setBounds(320, 340, 90, 26);
 
+        creditcardBalance5.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        creditcardBalance5.setForeground(new java.awt.Color(55, 74, 34));
+        creditcardBalance5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
         creditcardBalance5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditcardBalance5ActionPerformed(evt);
             }
         });
+        getContentPane().add(creditcardBalance5);
+        creditcardBalance5.setBounds(190, 340, 90, 26);
 
-        enterBtn.setText("Enter");
+        enterBtn.setBackground(new java.awt.Color(55, 74, 34));
+        enterBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        enterBtn.setForeground(new java.awt.Color(255, 255, 255));
+        enterBtn.setText("ENTER");
+        enterBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         enterBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 enterBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(enterBtn);
+        enterBtn.setBounds(40, 540, 149, 23);
 
-        clearBtn.setText("Clear");
+        clearBtn.setBackground(new java.awt.Color(55, 74, 34));
+        clearBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        clearBtn.setForeground(new java.awt.Color(255, 255, 255));
+        clearBtn.setText("CLEAR");
+        clearBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         clearBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clearBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(clearBtn);
+        clearBtn.setBounds(40, 570, 149, 23);
 
         creditcard6.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        creditcard6.setForeground(new java.awt.Color(55, 74, 34));
         creditcard6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        creditcard6.setText("Credit Card 6:");
+        creditcard6.setText("CARD 6:");
         creditcard6.setToolTipText("");
+        getContentPane().add(creditcard6);
+        creditcard6.setBounds(40, 390, 76, 26);
 
+        creditcardBalance6.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        creditcardBalance6.setForeground(new java.awt.Color(55, 74, 34));
+        creditcardBalance6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
         creditcardBalance6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditcardBalance6ActionPerformed(evt);
             }
         });
+        getContentPane().add(creditcardBalance6);
+        creditcardBalance6.setBounds(190, 390, 90, 26);
 
+        creditcardLimit6.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        creditcardLimit6.setForeground(new java.awt.Color(55, 74, 34));
+        creditcardLimit6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
         creditcardLimit6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditcardLimit6ActionPerformed(evt);
             }
         });
+        getContentPane().add(creditcardLimit6);
+        creditcardLimit6.setBounds(320, 390, 90, 26);
 
         creditcard7.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        creditcard7.setForeground(new java.awt.Color(55, 74, 34));
         creditcard7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        creditcard7.setText("Credit Card 7:");
+        creditcard7.setText("CARD 7:");
         creditcard7.setToolTipText("");
+        getContentPane().add(creditcard7);
+        creditcard7.setBounds(40, 440, 76, 26);
 
+        creditcardBalance7.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        creditcardBalance7.setForeground(new java.awt.Color(55, 74, 34));
+        creditcardBalance7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
         creditcardBalance7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditcardBalance7ActionPerformed(evt);
             }
         });
+        getContentPane().add(creditcardBalance7);
+        creditcardBalance7.setBounds(190, 440, 90, 26);
 
+        creditcardLimit7.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        creditcardLimit7.setForeground(new java.awt.Color(55, 74, 34));
+        creditcardLimit7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
         creditcardLimit7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditcardLimit7ActionPerformed(evt);
             }
         });
+        getContentPane().add(creditcardLimit7);
+        creditcardLimit7.setBounds(320, 440, 90, 26);
 
+        creditcardBalance8.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        creditcardBalance8.setForeground(new java.awt.Color(55, 74, 34));
+        creditcardBalance8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
         creditcardBalance8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditcardBalance8ActionPerformed(evt);
             }
         });
+        getContentPane().add(creditcardBalance8);
+        creditcardBalance8.setBounds(190, 490, 90, 26);
 
         creditcard8.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        creditcard8.setForeground(new java.awt.Color(55, 74, 34));
         creditcard8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        creditcard8.setText("Credit Card 8:");
+        creditcard8.setText("CARD 8:");
         creditcard8.setToolTipText("");
+        getContentPane().add(creditcard8);
+        creditcard8.setBounds(40, 490, 76, 26);
 
+        creditcardLimit8.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        creditcardLimit8.setForeground(new java.awt.Color(55, 74, 34));
+        creditcardLimit8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
         creditcardLimit8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creditcardLimit8ActionPerformed(evt);
             }
         });
+        getContentPane().add(creditcardLimit8);
+        creditcardLimit8.setBounds(320, 490, 90, 26);
 
-        totalUtilizationTitle.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        totalUtilizationTitle.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        totalUtilizationTitle.setForeground(new java.awt.Color(55, 74, 34));
         totalUtilizationTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        totalUtilizationTitle.setText("Total Utilization");
+        totalUtilizationTitle.setText("TOTAL UTILIZATION");
         totalUtilizationTitle.setToolTipText("");
+        getContentPane().add(totalUtilizationTitle);
+        totalUtilizationTitle.setBounds(200, 540, 180, 19);
 
+        totalUtilizationPercentage.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        totalUtilizationPercentage.setForeground(new java.awt.Color(55, 74, 34));
+        totalUtilizationPercentage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
         totalUtilizationPercentage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 totalUtilizationPercentageActionPerformed(evt);
             }
         });
+        getContentPane().add(totalUtilizationPercentage);
+        totalUtilizationPercentage.setBounds(220, 570, 180, 40);
 
-        dashboardBtn.setText("Return to Dashboard");
+        dashboardBtn.setBackground(new java.awt.Color(96, 108, 56));
+        dashboardBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 10)); // NOI18N
+        dashboardBtn.setForeground(new java.awt.Color(255, 255, 255));
+        dashboardBtn.setText("BACK TO DASHBOARD");
+        dashboardBtn.setActionCommand("RETURN TO DASHBOARD");
         dashboardBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dashboardBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(dashboardBtn);
+        dashboardBtn.setBounds(40, 600, 149, 26);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(creditcard2)
-                            .addComponent(creditcard3)
-                            .addComponent(creditcard1)
-                            .addComponent(creditcard4)
-                            .addComponent(creditcard5))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(creditcardBalance2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(41, 41, 41)
-                                        .addComponent(creditcardLimit2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(creditcardBalance3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(41, 41, 41)
-                                        .addComponent(creditcardLimit3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                                .addComponent(creditcardBalance1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41)
-                                .addComponent(creditcardLimit1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(50, 50, 50))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(creditcard6)
-                                .addComponent(creditcard7)
-                                .addComponent(creditcard8)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(164, 164, 164)
-                                    .addComponent(creditcardBalance8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(41, 41, 41)
-                                    .addComponent(creditcardLimit8, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(enterBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(totalUtilizationPercentage, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(creditcardBalance6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(41, 41, 41)
-                                                .addComponent(creditcardLimit6, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(creditcardBalance7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(41, 41, 41)
-                                                .addComponent(creditcardLimit7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addComponent(totalUtilizationTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                        .addContainerGap())))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(189, 189, 189)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(creditcardBalance4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(creditcardLimit4, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(creditcardBalance5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(creditcardLimit5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(creditUtilizationHeader, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(balanceTitle)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(limitTitle)
-                        .addGap(70, 70, 70))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dashboardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(creditUtilizationHeader)
-                    .addComponent(dashboardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(balanceTitle)
-                    .addComponent(limitTitle))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(creditcard1)
-                    .addComponent(creditcardBalance1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(creditcardLimit1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(creditcard2)
-                    .addComponent(creditcardBalance2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(creditcardLimit2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(creditcard3)
-                    .addComponent(creditcardBalance3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(creditcardLimit3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(creditcard4)
-                    .addComponent(creditcardBalance4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(creditcardLimit4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(creditcard5)
-                    .addComponent(creditcardBalance5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(creditcardLimit5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(creditcard6)
-                    .addComponent(creditcardBalance6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(creditcardLimit6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(creditcard7)
-                    .addComponent(creditcardBalance7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(creditcardLimit7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(creditcard8)
-                    .addComponent(creditcardBalance8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(creditcardLimit8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(enterBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                        .addComponent(clearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(totalUtilizationTitle)
-                        .addGap(18, 18, 18)
-                        .addComponent(totalUtilizationPercentage)))
-                .addContainerGap(74, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cardBG.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 460, 660);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -603,7 +583,6 @@ if (utilization < 30) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel balanceTitle;
     private javax.swing.JButton clearBtn;
-    private javax.swing.JLabel creditUtilizationHeader;
     private javax.swing.JLabel creditcard1;
     private javax.swing.JLabel creditcard2;
     private javax.swing.JLabel creditcard3;
@@ -630,6 +609,7 @@ if (utilization < 30) {
     private javax.swing.JTextField creditcardLimit8;
     private javax.swing.JButton dashboardBtn;
     private javax.swing.JButton enterBtn;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel limitTitle;
     private javax.swing.JTextField totalUtilizationPercentage;
     private javax.swing.JLabel totalUtilizationTitle;

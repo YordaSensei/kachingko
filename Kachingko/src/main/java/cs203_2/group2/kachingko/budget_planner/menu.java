@@ -283,8 +283,13 @@ public class menu extends javax.swing.JFrame {
         notifBtn.setBackground(new java.awt.Color(40, 54, 24));
         notifBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         notifBtn.setForeground(new java.awt.Color(255, 255, 255));
-        notifBtn.setText("Notifications");
+        notifBtn.setText("NOTIFICATIONS");
         notifBtn.setToolTipText("");
+        notifBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                notifBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(notifBtn);
         notifBtn.setBounds(230, 600, 207, 30);
 
@@ -337,6 +342,10 @@ public class menu extends javax.swing.JFrame {
             loadExpenses(categoryId);
         }
     }//GEN-LAST:event_categoryTableMouseClicked
+
+    private void notifBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notifBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_notifBtnActionPerformed
 
     /**
      * @param args the command line arguments

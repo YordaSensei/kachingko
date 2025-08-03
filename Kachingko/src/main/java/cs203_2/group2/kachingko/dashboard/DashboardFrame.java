@@ -7,6 +7,7 @@ import cs203_2.group2.kachingko.dashboard.SpendingTrendline.SpendingTrendline;
 import cs203_2.group2.kachingko.budget_planner.menu;
 import cs203_2.group2.kachingko.auth.Session;
 import cs203_2.group2.kachingko.monthlySpendingOverview.MonthlySpendingOverview;
+import cs203_2.group2.kachingko.dashboard.CreditLimit.CreditUtilization;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,15 +15,8 @@ import java.sql.ResultSet;
 
 import cs203_2.group2.kachingko.DBConnection;
 
-/**
- *
- * @author jeffm
- */
 public class DashboardFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form DashboardFrame
-     */
     public DashboardFrame() {
         initComponents();
         setSize(460, 680);
@@ -36,8 +30,8 @@ public class DashboardFrame extends javax.swing.JFrame {
     try (Connection conn = DBConnection.getConnection()) {
         String query = "SELECT username FROM users WHERE id = ?";
         PreparedStatement stmt = conn.prepareStatement(query);
-//        stmt.setInt(1, Session.currentUserId); // gets currrent user id from database 
-        stmt.setInt(1, 1); //temporary id for testing
+        stmt.setInt(1, Session.currentUserId); // gets currrent user id from database 
+        //stmt.setInt(1, 1); //temporary id for testing
         ResultSet rs = stmt.executeQuery();
 
         if (rs.next()) {
@@ -96,7 +90,6 @@ public class DashboardFrame extends javax.swing.JFrame {
         budgetPlannerBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
         budgetPlannerBtn.setForeground(new java.awt.Color(242, 242, 242));
         budgetPlannerBtn.setText("<html>  BUDGET<br>PLANNER</html> ");
-        budgetPlannerBtn.setActionCommand("<html>  BUDGET<br>PLANNER</html> ");
         budgetPlannerBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         budgetPlannerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +144,11 @@ public class DashboardFrame extends javax.swing.JFrame {
         creditCardBtn.setForeground(new java.awt.Color(242, 242, 242));
         creditCardBtn.setText("<html>CARD<br>UTILIZATION</html> ");
         creditCardBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        creditCardBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creditCardBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(creditCardBtn);
         creditCardBtn.setBounds(230, 380, 170, 130);
 
@@ -184,6 +182,13 @@ public class DashboardFrame extends javax.swing.JFrame {
         
         this.setVisible(false);
     }//GEN-LAST:event_budgetPlannerBtnActionPerformed
+
+    private void creditCardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditCardBtnActionPerformed
+       CreditUtilization cardWindow = new CreditUtilization();
+       cardWindow.setVisible(true);
+       
+       this.setVisible(false);
+    }//GEN-LAST:event_creditCardBtnActionPerformed
 
     /**
      * @param args the command line arguments

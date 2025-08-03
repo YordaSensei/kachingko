@@ -170,19 +170,23 @@ public class MonthlySpendingOverview extends javax.swing.JFrame {
         totalSpent = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         totalSpentMonth = new javax.swing.JLabel();
-        insightsAnalytics = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         backToDashboard = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(460, 680));
         getContentPane().setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        totalSpent.setBackground(new java.awt.Color(255, 255, 255));
+        totalSpent.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 108, 56)));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(55, 74, 34));
         jLabel1.setText("Total spent this month:");
 
+        totalSpentMonth.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        totalSpentMonth.setForeground(new java.awt.Color(96, 108, 56));
         totalSpentMonth.setText("₱0.00");
 
         javax.swing.GroupLayout totalSpentLayout = new javax.swing.GroupLayout(totalSpent);
@@ -190,11 +194,11 @@ public class MonthlySpendingOverview extends javax.swing.JFrame {
         totalSpentLayout.setHorizontalGroup(
             totalSpentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(totalSpentLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(50, 50, 50)
                 .addComponent(jLabel1)
-                .addGap(30, 30, 30)
+                .addGap(32, 32, 32)
                 .addComponent(totalSpentMonth)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         totalSpentLayout.setVerticalGroup(
             totalSpentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,52 +207,43 @@ public class MonthlySpendingOverview extends javax.swing.JFrame {
                 .addGroup(totalSpentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(totalSpentMonth))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         getContentPane().add(totalSpent);
-        totalSpent.setBounds(30, 130, 400, 60);
+        totalSpent.setBounds(30, 130, 390, 60);
 
+        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 108, 56)));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {},
             new String [] {"Insight","Value"}
         ));
+        jTable1.setGridColor(new java.awt.Color(96, 108, 56));
+        jTable1.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        jTable1.setSelectionForeground(new java.awt.Color(96, 108, 56));
         jScrollPane1.setViewportView(jTable1);
 
-        backToDashboard.setText("Back to Dashboard");
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(30, 210, 390, 350);
+
+        backToDashboard.setBackground(new java.awt.Color(96, 108, 56));
+        backToDashboard.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        backToDashboard.setForeground(new java.awt.Color(255, 255, 255));
+        backToDashboard.setText("BACK TO DASHBOARD");
+        backToDashboard.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         backToDashboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backToDashboardActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout insightsAnalyticsLayout = new javax.swing.GroupLayout(insightsAnalytics);
-        insightsAnalytics.setLayout(insightsAnalyticsLayout);
-        insightsAnalyticsLayout.setHorizontalGroup(
-            insightsAnalyticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addGroup(insightsAnalyticsLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(backToDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        insightsAnalyticsLayout.setVerticalGroup(
-            insightsAnalyticsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, insightsAnalyticsLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(backToDashboard)
-                .addGap(68, 68, 68))
-        );
-
-        getContentPane().add(insightsAnalytics);
-        insightsAnalytics.setBounds(30, 200, 380, 360);
+        getContentPane().add(backToDashboard);
+        backToDashboard.setBounds(259, 583, 160, 30);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Monthly Spending Overview");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/monthlyBG.png"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 30, 380, 90);
+        jLabel2.setBounds(0, 0, 450, 660);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -287,7 +282,6 @@ public class MonthlySpendingOverview extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backToDashboard;
-    private javax.swing.JPanel insightsAnalytics;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

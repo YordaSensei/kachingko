@@ -21,10 +21,9 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
         setTitle("Menu");
-        setSize(460, 655);
+        setSize(460, 680);
         setResizable(false);
         setLocationRelativeTo(null);
-        setLayout(new BorderLayout());
     }
 
     /**
@@ -36,79 +35,59 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        menuHeader = new javax.swing.JLabel();
-        kachingkoHeader = new javax.swing.JLabel();
         alertRecommsBtn = new javax.swing.JButton();
         profileSettingsBtn = new javax.swing.JButton();
         dashboardBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(460, 680));
         setMinimumSize(new java.awt.Dimension(460, 680));
-        setPreferredSize(new java.awt.Dimension(460, 680));
         setResizable(false);
         setSize(new java.awt.Dimension(460, 680));
+        getContentPane().setLayout(null);
 
-        menuHeader.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        menuHeader.setText("Menu");
-
-        kachingkoHeader.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        kachingkoHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        kachingkoHeader.setText("Insert Kachingko!");
-
-        alertRecommsBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        alertRecommsBtn.setText("Alerts & Recommendations");
+        alertRecommsBtn.setBackground(new java.awt.Color(55, 74, 34));
+        alertRecommsBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        alertRecommsBtn.setForeground(new java.awt.Color(255, 255, 255));
+        alertRecommsBtn.setText("ALERTS & RECOMMENDATIONS");
+        alertRecommsBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         alertRecommsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 alertRecommsBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(alertRecommsBtn);
+        alertRecommsBtn.setBounds(90, 280, 280, 60);
 
-        profileSettingsBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        profileSettingsBtn.setText("Profile & Settings");
+        profileSettingsBtn.setBackground(new java.awt.Color(55, 74, 34));
+        profileSettingsBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        profileSettingsBtn.setForeground(new java.awt.Color(255, 255, 255));
+        profileSettingsBtn.setText("PROFILE & SETTINGS");
+        profileSettingsBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         profileSettingsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 profileSettingsBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(profileSettingsBtn);
+        profileSettingsBtn.setBounds(90, 350, 280, 60);
 
-        dashboardBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        dashboardBtn.setText("Dashboard");
+        dashboardBtn.setBackground(new java.awt.Color(96, 108, 56));
+        dashboardBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        dashboardBtn.setForeground(new java.awt.Color(255, 255, 255));
+        dashboardBtn.setText("DASHBOARD");
         dashboardBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dashboardBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(dashboardBtn);
+        dashboardBtn.setBounds(150, 590, 150, 30);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kachingkoHeader, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dashboardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(profileSettingsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(menuHeader)
-                    .addComponent(alertRecommsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(55, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addComponent(kachingkoHeader)
-                .addGap(50, 50, 50)
-                .addComponent(menuHeader)
-                .addGap(106, 106, 106)
-                .addComponent(alertRecommsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(profileSettingsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
-                .addComponent(dashboardBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menuBG.png"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, -10, 460, 680);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -194,8 +173,7 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton alertRecommsBtn;
     private javax.swing.JButton dashboardBtn;
-    private javax.swing.JLabel kachingkoHeader;
-    private javax.swing.JLabel menuHeader;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton profileSettingsBtn;
     // End of variables declaration//GEN-END:variables
 }
