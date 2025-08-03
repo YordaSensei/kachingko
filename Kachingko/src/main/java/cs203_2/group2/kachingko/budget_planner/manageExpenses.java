@@ -21,6 +21,8 @@ public class manageExpenses extends javax.swing.JFrame {
     
     public manageExpenses() {
         initComponents();
+        setSize(460, 680);
+        setResizable(false);
         setLocationRelativeTo(null);
         
         categoryTable.setModel(new DefaultTableModel(
