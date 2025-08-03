@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import cs203_2.group2.kachingko.DBConnection;
+import javax.swing.JOptionPane;
 /**
  *
  * @author jeffm
@@ -164,7 +165,17 @@ public class DashboardFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_monthlySpendingBtnActionPerformed
 
     private void menuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBtnActionPerformed
-        // TODO add your handling code here:
+        try {
+        cs203_2.group2.kachingko.dashboard.Menu.Menu alertsWindow = 
+        new cs203_2.group2.kachingko.dashboard.Menu.Menu();
+        alertsWindow.setVisible(true);
+        this.dispose();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, 
+            "Error opening Menu: " + e.getMessage(),
+            "Navigation Error", 
+            JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_menuBtnActionPerformed
 
     private void spendingTrendlineBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spendingTrendlineBtnActionPerformed
