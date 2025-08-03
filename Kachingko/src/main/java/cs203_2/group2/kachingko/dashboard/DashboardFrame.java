@@ -4,6 +4,7 @@
  */
 package cs203_2.group2.kachingko.dashboard;
 import cs203_2.group2.kachingko.dashboard.SpendingTrendline.SpendingTrendline;
+import cs203_2.group2.kachingko.budget_planner.menu;
 import cs203_2.group2.kachingko.auth.Session;
 
 import java.sql.Connection;
@@ -181,6 +182,11 @@ public class DashboardFrame extends javax.swing.JFrame {
         budgetPlannerBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         budgetPlannerBtn.setForeground(new java.awt.Color(242, 242, 242));
         budgetPlannerBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        budgetPlannerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                budgetPlannerBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(budgetPlannerBtn);
         budgetPlannerBtn.setBounds(230, 230, 170, 130);
 
@@ -247,6 +253,13 @@ public class DashboardFrame extends javax.swing.JFrame {
             SpendingTrendline trendlineWindow = new SpendingTrendline();
             trendlineWindow.setVisible(true);
     }//GEN-LAST:event_spendingTrendlineBtnActionPerformed
+
+    private void budgetPlannerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_budgetPlannerBtnActionPerformed
+        menu menuWindow = new menu();
+        menuWindow.setVisible(true);
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_budgetPlannerBtnActionPerformed
 
     /**
      * @param args the command line arguments
