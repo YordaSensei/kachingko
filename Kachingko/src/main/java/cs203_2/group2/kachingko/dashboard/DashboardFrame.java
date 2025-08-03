@@ -8,6 +8,7 @@ import cs203_2.group2.kachingko.budget_planner.menu;
 import cs203_2.group2.kachingko.auth.Session;
 import cs203_2.group2.kachingko.monthlySpendingOverview.MonthlySpendingOverview;
 import cs203_2.group2.kachingko.dashboard.CreditLimit.CreditUtilization;
+import cs203_2.group2.kachingko.dashboard.Menu.Menu;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -166,7 +167,10 @@ public class DashboardFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_monthlySpendingBtnActionPerformed
 
     private void menuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBtnActionPerformed
-        // TODO add your handling code here:
+        Menu menuWindow = new Menu();
+        menuWindow.setVisible(true);
+            
+            this.setVisible(false);
     }//GEN-LAST:event_menuBtnActionPerformed
 
     private void spendingTrendlineBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spendingTrendlineBtnActionPerformed
