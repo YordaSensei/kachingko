@@ -23,7 +23,7 @@ public class DashboardFrame extends javax.swing.JFrame {
      */
     public DashboardFrame() {
         initComponents();
-        setSize(460, 655);
+        setSize(460, 680);
         setResizable(false);
         setLocationRelativeTo(null);
         
@@ -63,16 +63,6 @@ public class DashboardFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel10 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         usernameHeader = new javax.swing.JLabel();
         userLabel = new javax.swing.JLabel();
         budgetPlannerBtn = new javax.swing.JButton();
@@ -85,102 +75,26 @@ public class DashboardFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel10.setText("CARD");
-        jLabel10.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel10.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(240, 420, 140, 19);
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel13.setText("CREDIT");
-        jLabel13.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel13.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(jLabel13);
-        jLabel13.setBounds(240, 400, 140, 19);
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel12.setText("UTILIZATION");
-        jLabel12.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel12.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(jLabel12);
-        jLabel12.setBounds(240, 440, 140, 19);
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel11.setText("TRENDLINE");
-        jLabel11.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel11.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(jLabel11);
-        jLabel11.setBounds(50, 420, 140, 19);
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel8.setText("SPENDING");
-        jLabel8.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(jLabel8);
-        jLabel8.setBounds(50, 400, 140, 19);
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel9.setText("PLANNER");
-        jLabel9.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel9.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(jLabel9);
-        jLabel9.setBounds(240, 270, 140, 19);
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel5.setText("OVERVIEW");
-        jLabel5.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(jLabel5);
-        jLabel5.setBounds(50, 290, 140, 19);
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel7.setText("BUDGET ");
-        jLabel7.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(240, 250, 140, 19);
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel6.setText("SPENDING");
-        jLabel6.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(50, 270, 140, 19);
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(242, 242, 242));
-        jLabel1.setText("MONTHLY");
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(50, 250, 140, 19);
-
         usernameHeader.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        usernameHeader.setForeground(new java.awt.Color(40, 87, 48));
         usernameHeader.setText("Welcome,");
         usernameHeader.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         usernameHeader.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(usernameHeader);
-        usernameHeader.setBounds(60, 130, 72, 19);
+        usernameHeader.setBounds(60, 140, 72, 20);
 
         userLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        userLabel.setForeground(new java.awt.Color(96, 108, 56));
         userLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         userLabel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         getContentPane().add(userLabel);
-        userLabel.setBounds(140, 130, 260, 19);
+        userLabel.setBounds(140, 140, 260, 19);
 
         budgetPlannerBtn.setBackground(new java.awt.Color(55, 74, 34));
-        budgetPlannerBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        budgetPlannerBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
         budgetPlannerBtn.setForeground(new java.awt.Color(242, 242, 242));
+        budgetPlannerBtn.setText("<html>  BUDGET<br>PLANNER</html> ");
+        budgetPlannerBtn.setActionCommand("<html>  BUDGET<br>PLANNER</html> ");
         budgetPlannerBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         budgetPlannerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,12 +115,14 @@ public class DashboardFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(menuBtn);
-        menuBtn.setBounds(40, 550, 360, 60);
+        menuBtn.setBounds(40, 540, 360, 60);
 
         monthlySpendingBtn.setBackground(new java.awt.Color(40, 54, 24));
-        monthlySpendingBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        monthlySpendingBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
         monthlySpendingBtn.setForeground(new java.awt.Color(242, 242, 242));
         monthlySpendingBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        monthlySpendingBtn.setLabel("<html>MONTHLY<br>SPENDING<br>OVERVIEW</html> ");
+        monthlySpendingBtn.setMargin(new java.awt.Insets(2, 40, 3, 14));
         monthlySpendingBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 monthlySpendingBtnActionPerformed(evt);
@@ -216,8 +132,9 @@ public class DashboardFrame extends javax.swing.JFrame {
         monthlySpendingBtn.setBounds(40, 230, 170, 130);
 
         spendingTrendlineBtn.setBackground(new java.awt.Color(70, 94, 44));
-        spendingTrendlineBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        spendingTrendlineBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
         spendingTrendlineBtn.setForeground(new java.awt.Color(242, 242, 242));
+        spendingTrendlineBtn.setText("<html>SPENDING<br>TRENDLINE</html> ");
         spendingTrendlineBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         spendingTrendlineBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,15 +145,16 @@ public class DashboardFrame extends javax.swing.JFrame {
         spendingTrendlineBtn.setBounds(40, 380, 170, 130);
 
         creditCardBtn.setBackground(new java.awt.Color(96, 108, 56));
-        creditCardBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        creditCardBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
         creditCardBtn.setForeground(new java.awt.Color(242, 242, 242));
+        creditCardBtn.setText("<html>CARD<br>UTILIZATION</html> ");
         creditCardBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(creditCardBtn);
         creditCardBtn.setBounds(230, 380, 170, 130);
 
         dashboardBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dashboardBG.png"))); // NOI18N
         getContentPane().add(dashboardBG);
-        dashboardBG.setBounds(0, -180, 460, 1000);
+        dashboardBG.setBounds(0, -180, 460, 1020);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -252,6 +170,8 @@ public class DashboardFrame extends javax.swing.JFrame {
     private void spendingTrendlineBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spendingTrendlineBtnActionPerformed
             SpendingTrendline trendlineWindow = new SpendingTrendline();
             trendlineWindow.setVisible(true);
+            
+            this.setVisible(false);
     }//GEN-LAST:event_spendingTrendlineBtnActionPerformed
 
     private void budgetPlannerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_budgetPlannerBtnActionPerformed
@@ -300,16 +220,6 @@ public class DashboardFrame extends javax.swing.JFrame {
     private javax.swing.JButton budgetPlannerBtn;
     private javax.swing.JButton creditCardBtn;
     private javax.swing.JLabel dashboardBG;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JButton menuBtn;
     private javax.swing.JButton monthlySpendingBtn;
     private javax.swing.JButton spendingTrendlineBtn;

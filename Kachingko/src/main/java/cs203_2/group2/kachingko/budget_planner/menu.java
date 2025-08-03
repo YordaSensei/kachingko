@@ -312,6 +312,27 @@ public class menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        DashboardFrame dashboardWindow = new DashboardFrame();
+        dashboardWindow.setVisible(true);
+
+        this.setVisible(false);
+    }//GEN-LAST:event_backBtnActionPerformed
+
+    private void expensesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expensesBtnActionPerformed
+        manageExpenses expensesWindow = new manageExpenses();
+        expensesWindow.setVisible(true);
+
+        this.setVisible(false);
+    }//GEN-LAST:event_expensesBtnActionPerformed
+
+    private void catBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_catBtnActionPerformed
+        manageCat categoryWindow = new manageCat();
+        categoryWindow.setVisible(true);
+
+        this.setVisible(false);
+    }//GEN-LAST:event_catBtnActionPerformed
+
     private void categoryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categoryTableMouseClicked
         int selectedRow = categoryTable.getSelectedRow();
         if (selectedRow != -1) {
@@ -319,27 +340,6 @@ public class menu extends javax.swing.JFrame {
             loadExpenses(categoryId);
         }
     }//GEN-LAST:event_categoryTableMouseClicked
-
-    private void catBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_catBtnActionPerformed
-        manageCat categoryWindow = new manageCat();
-        categoryWindow.setVisible(true);
-        
-        this.setVisible(false);
-    }//GEN-LAST:event_catBtnActionPerformed
-
-    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        DashboardFrame dashboardWindow = new DashboardFrame();
-        dashboardWindow.setVisible(true);
-        
-        this.setVisible(false);
-    }//GEN-LAST:event_backBtnActionPerformed
-
-    private void expensesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expensesBtnActionPerformed
-        manageExpenses expensesWindow = new manageExpenses();
-        expensesWindow.setVisible(true);
-        
-        this.setVisible(false);
-    }//GEN-LAST:event_expensesBtnActionPerformed
 
     /**
      * @param args the command line arguments
