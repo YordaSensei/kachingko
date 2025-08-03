@@ -138,7 +138,6 @@ public class menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         categoryTable = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -152,8 +151,7 @@ public class menu extends javax.swing.JFrame {
         backBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        getContentPane().setLayout(null);
 
         categoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -181,6 +179,9 @@ public class menu extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(categoryTable);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(12, 49, 426, 135);
+
         expenseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -202,6 +203,9 @@ public class menu extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(expenseTable);
 
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(12, 190, 426, 184);
+
         catBtn.setText("Manage Categories");
         catBtn.setToolTipText("");
         catBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -209,6 +213,8 @@ public class menu extends javax.swing.JFrame {
                 catBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(catBtn);
+        catBtn.setBounds(12, 532, 207, 50);
 
         goalTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -231,6 +237,9 @@ public class menu extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(goalTable);
 
+        getContentPane().add(jScrollPane3);
+        jScrollPane3.setBounds(12, 380, 426, 140);
+
         expensesBtn.setText("Manage Expenses");
         expensesBtn.setToolTipText("");
         expensesBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -238,12 +247,18 @@ public class menu extends javax.swing.JFrame {
                 expensesBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(expensesBtn);
+        expensesBtn.setBounds(231, 532, 207, 50);
 
         goalsBtn.setText("Manage Goals");
         goalsBtn.setToolTipText("");
+        getContentPane().add(goalsBtn);
+        goalsBtn.setBounds(12, 588, 207, 50);
 
         notifBtn.setText("Notifications");
         notifBtn.setToolTipText("");
+        getContentPane().add(notifBtn);
+        notifBtn.setBounds(231, 588, 207, 50);
 
         backBtn.setText("Return to Dashboard");
         backBtn.setToolTipText("");
@@ -252,62 +267,8 @@ public class menu extends javax.swing.JFrame {
                 backBtnActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(catBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                        .addComponent(expensesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(goalsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(notifBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(12, 12, 12))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(backBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(expensesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(catBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(goalsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(notifBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        getContentPane().add(backBtn);
+        backBtn.setBounds(289, 16, 149, 27);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -374,7 +335,6 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JButton expensesBtn;
     private javax.swing.JTable goalTable;
     private javax.swing.JButton goalsBtn;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

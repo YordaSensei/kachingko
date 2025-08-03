@@ -20,184 +20,151 @@
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
   </AuxValues>
 
-  <Layout>
-    <DimensionLayout dim="0">
-      <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-      </Group>
-    </DimensionLayout>
-    <DimensionLayout dim="1">
-      <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-      </Group>
-    </DimensionLayout>
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+    <Property name="useNullLayout" type="boolean" value="true"/>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanel1">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="cc" red="cc" type="rgb"/>
-        </Property>
-      </Properties>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="12" y="49" width="426" height="135"/>
+        </Constraint>
+      </Constraints>
 
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPane2" alignment="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPane3" alignment="0" pref="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="catBtn" min="-2" pref="207" max="-2" attributes="0"/>
-                          <EmptySpace pref="12" max="32767" attributes="0"/>
-                          <Component id="expensesBtn" min="-2" pref="207" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="goalsBtn" min="-2" pref="207" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="notifBtn" min="-2" pref="207" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="backBtn" min="-2" pref="149" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                  <Component id="backBtn" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="135" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" min="-2" pref="184" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane3" min="-2" pref="140" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="expensesBtn" min="-2" pref="50" max="-2" attributes="0"/>
-                      <Component id="catBtn" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="goalsBtn" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                      <Component id="notifBtn" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="17" max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-          <AuxValues>
-            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-          </AuxValues>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JTable" name="categoryTable">
-              <Properties>
-                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="3" rowCount="4">
-                    <Column editable="false" title="Category" type="java.lang.Object"/>
-                    <Column editable="false" title="Budget" type="java.lang.Object"/>
-                    <Column editable="true" title="Total" type="java.lang.Object"/>
-                  </Table>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="categoryTableMouseClicked"/>
-              </Events>
-            </Component>
-          </SubComponents>
-        </Container>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
-          <AuxValues>
-            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-          </AuxValues>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JTable" name="expenseTable">
-              <Properties>
-                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="3" rowCount="4">
-                    <Column editable="false" title="Expense" type="java.lang.Object"/>
-                    <Column editable="false" title="Amount" type="java.lang.Object"/>
-                    <Column editable="false" title="Date" type="java.lang.Object"/>
-                  </Table>
-                </Property>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
-        <Component class="javax.swing.JButton" name="catBtn">
+        <Component class="javax.swing.JTable" name="categoryTable">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Manage Categories"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="3" rowCount="4">
+                <Column editable="false" title="Category" type="java.lang.Object"/>
+                <Column editable="false" title="Budget" type="java.lang.Object"/>
+                <Column editable="true" title="Total" type="java.lang.Object"/>
+              </Table>
+            </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="catBtnActionPerformed"/>
-          </Events>
-        </Component>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane3">
-          <AuxValues>
-            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-          </AuxValues>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JTable" name="goalTable">
-              <Properties>
-                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="3" rowCount="4">
-                    <Column editable="false" title="Goal" type="java.lang.Object"/>
-                    <Column editable="false" title="Current Amount" type="java.lang.Object"/>
-                    <Column editable="false" title="Target Amount" type="java.lang.Object"/>
-                  </Table>
-                </Property>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
-        <Component class="javax.swing.JButton" name="expensesBtn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Manage Expenses"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="expensesBtnActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="goalsBtn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Manage Goals"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="notifBtn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Notifications"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="backBtn">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Return to Dashboard"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backBtnActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="categoryTableMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
     </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="12" y="190" width="426" height="184"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="expenseTable">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="3" rowCount="4">
+                <Column editable="false" title="Expense" type="java.lang.Object"/>
+                <Column editable="false" title="Amount" type="java.lang.Object"/>
+                <Column editable="false" title="Date" type="java.lang.Object"/>
+              </Table>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JButton" name="catBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Manage Categories"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="catBtnActionPerformed"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="12" y="532" width="207" height="50"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="12" y="380" width="426" height="140"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="goalTable">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="3" rowCount="4">
+                <Column editable="false" title="Goal" type="java.lang.Object"/>
+                <Column editable="false" title="Current Amount" type="java.lang.Object"/>
+                <Column editable="false" title="Target Amount" type="java.lang.Object"/>
+              </Table>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JButton" name="expensesBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Manage Expenses"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="expensesBtnActionPerformed"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="231" y="532" width="207" height="50"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JButton" name="goalsBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Manage Goals"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="12" y="588" width="207" height="50"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JButton" name="notifBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Notifications"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="231" y="588" width="207" height="50"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JButton" name="backBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Return to Dashboard"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backBtnActionPerformed"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="289" y="16" width="149" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
   </SubComponents>
 </Form>
