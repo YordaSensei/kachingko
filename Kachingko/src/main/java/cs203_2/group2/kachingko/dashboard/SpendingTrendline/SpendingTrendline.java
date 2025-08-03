@@ -403,7 +403,7 @@ public class SpendingTrendline extends javax.swing.JFrame {
         searchLabel.setBounds(20, 120, 51, 17);
 
         trendlinesHeader.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        trendlinesHeader.setIcon(new javax.swing.ImageIcon("C:\\Users\\Administrator\\Desktop\\Programming\\kachingko\\Kachingko\\src\\main\\resources\\images\\trendlineBG.png")); // NOI18N
+        trendlinesHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/trendlineBG.png"))); // NOI18N
         trendlinesHeader.setToolTipText("");
         getContentPane().add(trendlinesHeader);
         trendlinesHeader.setBounds(0, 0, 450, 660);

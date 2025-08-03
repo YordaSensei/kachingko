@@ -14,6 +14,8 @@ public class menu extends javax.swing.JFrame {
 
     public menu() {
         initComponents();
+        setSize(460, 680);
+        setResizable(false);
         setLocationRelativeTo(null);
         
         categoryTable.setModel(new DefaultTableModel(
@@ -154,25 +156,30 @@ public class menu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        categoryTable.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        categoryTable.setForeground(new java.awt.Color(40, 54, 24));
         categoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Category", "Budget", "Total"
+                "Category", "Budget", "Total", "Budget Left"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true
+                false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        categoryTable.setGridColor(new java.awt.Color(40, 54, 24));
+        categoryTable.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        categoryTable.setSelectionForeground(new java.awt.Color(40, 54, 24));
         categoryTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 categoryTableMouseClicked(evt);
@@ -181,8 +188,10 @@ public class menu extends javax.swing.JFrame {
         jScrollPane1.setViewportView(categoryTable);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(12, 49, 426, 135);
+        jScrollPane1.setBounds(10, 120, 426, 130);
 
+        expenseTable.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        expenseTable.setForeground(new java.awt.Color(40, 54, 24));
         expenseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -202,12 +211,17 @@ public class menu extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        expenseTable.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        expenseTable.setSelectionForeground(new java.awt.Color(40, 54, 24));
         jScrollPane2.setViewportView(expenseTable);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(12, 190, 426, 184);
+        jScrollPane2.setBounds(10, 260, 426, 140);
 
-        catBtn.setText("Manage Categories");
+        catBtn.setBackground(new java.awt.Color(40, 54, 24));
+        catBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        catBtn.setForeground(new java.awt.Color(255, 255, 255));
+        catBtn.setText("MANAGE CATEGORIES");
         catBtn.setToolTipText("");
         catBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,8 +229,10 @@ public class menu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(catBtn);
-        catBtn.setBounds(12, 532, 207, 50);
+        catBtn.setBounds(10, 560, 207, 30);
 
+        goalTable.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        goalTable.setForeground(new java.awt.Color(40, 54, 24));
         goalTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -236,12 +252,17 @@ public class menu extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        goalTable.setSelectionBackground(new java.awt.Color(255, 255, 255));
+        goalTable.setSelectionForeground(new java.awt.Color(40, 54, 24));
         jScrollPane3.setViewportView(goalTable);
 
         getContentPane().add(jScrollPane3);
-        jScrollPane3.setBounds(12, 380, 426, 140);
+        jScrollPane3.setBounds(10, 410, 426, 130);
 
-        expensesBtn.setText("Manage Expenses");
+        expensesBtn.setBackground(new java.awt.Color(40, 54, 24));
+        expensesBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        expensesBtn.setForeground(new java.awt.Color(255, 255, 255));
+        expensesBtn.setText("MANAGE EXPENSES");
         expensesBtn.setToolTipText("");
         expensesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,27 +270,39 @@ public class menu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(expensesBtn);
-        expensesBtn.setBounds(231, 532, 207, 50);
+        expensesBtn.setBounds(230, 560, 207, 30);
 
-        goalsBtn.setText("Manage Goals");
+        goalsBtn.setBackground(new java.awt.Color(40, 54, 24));
+        goalsBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        goalsBtn.setForeground(new java.awt.Color(255, 255, 255));
+        goalsBtn.setText("MANAGE GOALS");
         goalsBtn.setToolTipText("");
         getContentPane().add(goalsBtn);
-        goalsBtn.setBounds(12, 588, 207, 50);
+        goalsBtn.setBounds(10, 600, 207, 30);
 
+        notifBtn.setBackground(new java.awt.Color(40, 54, 24));
+        notifBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        notifBtn.setForeground(new java.awt.Color(255, 255, 255));
         notifBtn.setText("Notifications");
         notifBtn.setToolTipText("");
         getContentPane().add(notifBtn);
-        notifBtn.setBounds(231, 588, 207, 50);
+        notifBtn.setBounds(230, 600, 207, 30);
 
-        backBtn.setText("Return to Dashboard");
+        backBtn.setBackground(new java.awt.Color(40, 54, 24));
+        backBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        backBtn.setForeground(new java.awt.Color(255, 255, 255));
+        backBtn.setText("BACK TO DASHBOARD");
         backBtn.setToolTipText("");
+        backBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backBtnActionPerformed(evt);
             }
         });
         getContentPane().add(backBtn);
-        backBtn.setBounds(289, 16, 149, 23);
+        backBtn.setBounds(279, 80, 150, 23);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/budgetplanner.png"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 450, 660);
 
