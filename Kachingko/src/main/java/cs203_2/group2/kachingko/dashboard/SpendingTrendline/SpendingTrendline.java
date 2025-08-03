@@ -71,8 +71,8 @@ public class SpendingTrendline extends javax.swing.JFrame {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement("SELECT * FROM transactions WHERE user_id = ?")) {
 
-            stmt.setInt(1, Session.currentUserId); // Use actual session ID
-//            stmt.setInt(1, 1); //Sample ID
+//            stmt.setInt(1, Session.currentUserId); // Use actual session ID
+            stmt.setInt(1, 1); //Sample ID
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -125,10 +125,9 @@ public class SpendingTrendline extends javax.swing.JFrame {
             case "Most Frequent Merchant":
                 sortByFrequency(MERCHANT_COLUMN, "merchant");
                 break;
-            case "Reset":
+            case "Default":
                 sorter.setRowFilter(null);
                 sorter.setSortKeys(null);
-                showMessage("Sorting and filtering reset");
                 break;
             default:
                 showMessage("Invalid sort option");
@@ -143,7 +142,6 @@ public class SpendingTrendline extends javax.swing.JFrame {
             new RowSorter.SortKey(AMOUNT_COLUMN, SortOrder.DESCENDING)
         );
         sorter.setSortKeys(sortKeys);
-        showMessage("Table sorted by amount (highest to lowest)");
     }
     
     /**
@@ -385,7 +383,7 @@ public class SpendingTrendline extends javax.swing.JFrame {
 
         sortDropdown.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
         sortDropdown.setForeground(new java.awt.Color(40, 54, 24));
-        sortDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Most Expensive", "Most Common Category", "Most Frequent Merchant", "Reset" }));
+        sortDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Default", "Most Expensive", "Most Common Category", "Most Frequent Merchant" }));
         sortDropdown.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(40, 54, 24)));
         getContentPane().add(sortDropdown);
         sortDropdown.setBounds(280, 120, 150, 20);
@@ -400,7 +398,7 @@ public class SpendingTrendline extends javax.swing.JFrame {
         searchLabel.setForeground(new java.awt.Color(55, 74, 34));
         searchLabel.setText("Search:");
         getContentPane().add(searchLabel);
-        searchLabel.setBounds(20, 120, 51, 17);
+        searchLabel.setBounds(20, 120, 60, 17);
 
         trendlinesHeader.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         trendlinesHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/trendlineBG.png"))); // NOI18N

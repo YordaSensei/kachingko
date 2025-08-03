@@ -143,10 +143,10 @@
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
-            <StringItem index="0" value="Most Expensive"/>
-            <StringItem index="1" value="Most Common Category"/>
-            <StringItem index="2" value="Most Frequent Merchant"/>
-            <StringItem index="3" value="Reset"/>
+            <StringItem index="0" value="Default"/>
+            <StringItem index="1" value="Most Expensive"/>
+            <StringItem index="2" value="Most Common Category"/>
+            <StringItem index="3" value="Most Frequent Merchant"/>
           </StringArray>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -194,7 +194,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="20" y="120" width="51" height="17"/>
+          <AbsoluteConstraints x="20" y="120" width="60" height="17"/>
         </Constraint>
       </Constraints>
     </Component>
