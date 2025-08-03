@@ -279,7 +279,7 @@ public class logGoals extends javax.swing.JFrame {
         jLabel3.setBounds(170, 460, 150, 19);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Administrator\\Desktop\\Programming\\kachingko\\Kachingko\\src\\main\\resources\\images\\logGoalsBG.png")); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logGoalsBG.png"))); // NOI18N
         getContentPane().add(jLabel5);
         jLabel5.setBounds(0, 0, 450, 660);
 

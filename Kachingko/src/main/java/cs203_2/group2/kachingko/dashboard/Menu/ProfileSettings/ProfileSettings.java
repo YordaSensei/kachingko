@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.*;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,8 @@ public class ProfileSettings extends javax.swing.JFrame {
      */
     public ProfileSettings() {
         initComponents();
+        setSize(460, 680);
+        setResizable(false);
         setLocationRelativeTo(null);
         loadUserData();
         setupComboBoxes();
@@ -98,53 +101,88 @@ private void setupComboBoxes() {
 }
 
 private void importCSVFile(File csvFile) {
-    try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
+    if (Session.currentUserId == -1) {
+        JOptionPane.showMessageDialog(this, "No user is logged in. Cannot import CSV.");
+        return;
+    }
+
+    try (BufferedReader br = new BufferedReader(new FileReader(csvFile));
+         Connection conn = DBConnection.getConnection()) {
+
+        // 🧹 Delete existing transactions for the current user
+        PreparedStatement deleteStmt = conn.prepareStatement("DELETE FROM transactions WHERE user_id = ?");
+        deleteStmt.setInt(1, Session.currentUserId);
+        deleteStmt.executeUpdate();
+
         String line;
         int lineCount = 0;
         int importedCount = 0;
-        
-        // Skip header line
-        reader.readLine();
-        
-        try (Connection conn = DBConnection.getConnection()) {
-            String insertQuery = """
-                INSERT INTO transactions (user_id, date, description, amount, category, card_type) 
-                VALUES (?, ?, ?, ?, ?, ?)""";
-            PreparedStatement stmt = conn.prepareStatement(insertQuery);
-            
-            while ((line = reader.readLine()) != null) {
-                lineCount++;
-                try {
-                    String[] parts = line.split(",");
-                    if (parts.length >= 4) {
-                        stmt.setInt(1, Session.currentUserId);
-                        stmt.setString(2, parts[0].trim()); // date
-                        stmt.setString(3, parts[1].trim()); // description
-                        stmt.setDouble(4, Double.parseDouble(parts[2].trim())); // amount
-                        stmt.setString(5, parts.length > 3 ? parts[3].trim() : "Other"); // category
-                        stmt.setString(6, parts.length > 4 ? parts[4].trim() : null); // card_type
-                        
-                        stmt.executeUpdate();
-                        importedCount++;
-                    }
-                } catch (Exception e) {
-                    System.out.println("Error processing line " + lineCount + ": " + e.getMessage());
-                }
+
+        // Show loading dialog
+        JOptionPane optionPane = new JOptionPane("Importing transactions...", JOptionPane.INFORMATION_MESSAGE);
+        final javax.swing.JDialog dialog = optionPane.createDialog(this, "Please Wait");
+        dialog.setDefaultCloseOperation(javax.swing.JDialog.DO_NOTHING_ON_CLOSE);
+        new Thread(() -> dialog.setVisible(true)).start();
+
+        br.readLine(); // Skip header line
+
+        String insertQuery = """
+            INSERT INTO transactions (user_id, transaction_id, date, merchant, category, amount, location, card_type)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """;
+
+        PreparedStatement stmt = conn.prepareStatement(insertQuery);
+
+        while ((line = br.readLine()) != null) {
+            lineCount++;
+            String[] parts = line.split(",");
+
+            if (parts.length < 7) continue;
+
+            try {
+                String txnId = parts[0].trim();
+                String rawDate = parts[1].trim();
+                String merchant = parts[2].trim();
+                String category = parts[3].trim();
+                double amount = Double.parseDouble(parts[4].trim());
+                String location = parts[5].trim();
+                String cardType = parts[6].trim();
+
+                java.util.Date parsedDate = new SimpleDateFormat("yyyy-MM-dd").parse(rawDate);
+                java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
+
+                stmt.setInt(1, Session.currentUserId);
+                stmt.setString(2, txnId);
+                stmt.setDate(3, sqlDate);
+                stmt.setString(4, merchant);
+                stmt.setString(5, category);
+                stmt.setDouble(6, amount);
+                stmt.setString(7, location);
+                stmt.setString(8, cardType);
+
+                stmt.executeUpdate();
+                importedCount++;
+
+            } catch (Exception e) {
+                System.out.println("Line " + lineCount + " error: " + e.getMessage());
             }
-            
-            JOptionPane.showMessageDialog(this,
-                "CSV import completed!\n" +
-                "Total lines processed: " + lineCount + "\n" +
-                "Successfully imported: " + importedCount + " transactions",
-                "Import Complete", JOptionPane.INFORMATION_MESSAGE);
-                
         }
-    } catch (IOException | SQLException ex) {
+
+        dialog.setVisible(false);
+        dialog.dispose();
+
         JOptionPane.showMessageDialog(this,
-            "Error importing CSV file: " + ex.getMessage(),
-            "Import Error", JOptionPane.ERROR_MESSAGE);
+            "Import complete!\nProcessed: " + lineCount + "\nImported: " + importedCount,
+            "Done", JOptionPane.INFORMATION_MESSAGE);
+
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this,
+            "Failed to import CSV: " + ex.getMessage(),
+            "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
+
+
 private void exportToCSV(File file) {
     try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
         // Write header
@@ -189,10 +227,8 @@ private void exportToCSV(File file) {
     private void initComponents() {
 
         profileInfoHeader = new javax.swing.JLabel();
-        profileSettingsHeader = new javax.swing.JLabel();
         usernameDisplayLabel = new javax.swing.JLabel();
         usernameLabel = new javax.swing.JLabel();
-        welcomeLabel = new javax.swing.JLabel();
         usernameField = new javax.swing.JTextField();
         emailLabel = new javax.swing.JLabel();
         emailField = new javax.swing.JTextField();
@@ -218,75 +254,109 @@ private void exportToCSV(File file) {
         exportDataLabel = new javax.swing.JLabel();
         exportDataBtn = new javax.swing.JButton();
         saveSettingsBtn = new javax.swing.JToggleButton();
+        profileSettingsHeader = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(460, 680));
         setMinimumSize(new java.awt.Dimension(460, 680));
         setResizable(false);
         setSize(new java.awt.Dimension(460, 680));
+        getContentPane().setLayout(null);
 
-        profileInfoHeader.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        profileInfoHeader.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        profileInfoHeader.setForeground(new java.awt.Color(96, 108, 56));
         profileInfoHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        profileInfoHeader.setText("Profile Information");
-
-        profileSettingsHeader.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        profileSettingsHeader.setText("Profile &  Settings");
+        profileInfoHeader.setText("PROFILE INFORMATION");
+        profileInfoHeader.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 108, 56)));
+        getContentPane().add(profileInfoHeader);
+        profileInfoHeader.setBounds(30, 120, 400, 30);
 
         usernameDisplayLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         usernameDisplayLabel.setText(" ");
+        getContentPane().add(usernameDisplayLabel);
+        usernameDisplayLabel.setBounds(117, 67, 23, 26);
 
-        usernameLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
+        usernameLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        usernameLabel.setForeground(new java.awt.Color(96, 108, 56));
         usernameLabel.setText("Username:");
-
-        welcomeLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        welcomeLabel.setText("Welcome");
+        getContentPane().add(usernameLabel);
+        usernameLabel.setBounds(30, 160, 77, 19);
 
         usernameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usernameFieldActionPerformed(evt);
             }
         });
+        getContentPane().add(usernameField);
+        usernameField.setBounds(230, 160, 200, 22);
 
-        emailLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
+        emailLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        emailLabel.setForeground(new java.awt.Color(96, 108, 56));
         emailLabel.setText("Email:");
+        getContentPane().add(emailLabel);
+        emailLabel.setBounds(30, 190, 60, 20);
 
         emailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailFieldActionPerformed(evt);
             }
         });
+        getContentPane().add(emailField);
+        emailField.setBounds(230, 190, 200, 22);
 
-        currPassLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
+        currPassLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        currPassLabel.setForeground(new java.awt.Color(96, 108, 56));
         currPassLabel.setText("Current Password:");
+        getContentPane().add(currPassLabel);
+        currPassLabel.setBounds(30, 220, 135, 20);
 
-        newPassLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
+        newPassLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        newPassLabel.setForeground(new java.awt.Color(96, 108, 56));
         newPassLabel.setText("New Password:");
+        getContentPane().add(newPassLabel);
+        newPassLabel.setBounds(30, 250, 111, 19);
 
         currentPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 currentPasswordFieldActionPerformed(evt);
             }
         });
+        getContentPane().add(currentPasswordField);
+        currentPasswordField.setBounds(230, 220, 200, 22);
 
         newPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newPasswordFieldActionPerformed(evt);
             }
         });
+        getContentPane().add(newPasswordField);
+        newPasswordField.setBounds(230, 250, 200, 22);
 
-        saveAccDetailsBtn.setText("Save Account Details");
+        saveAccDetailsBtn.setBackground(new java.awt.Color(96, 108, 56));
+        saveAccDetailsBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        saveAccDetailsBtn.setForeground(new java.awt.Color(255, 255, 255));
+        saveAccDetailsBtn.setText("SAVE DETAILS");
         saveAccDetailsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveAccDetailsBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(saveAccDetailsBtn);
+        saveAccDetailsBtn.setBounds(30, 280, 150, 24);
 
-        settingsHeader.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        settingsHeader.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        settingsHeader.setForeground(new java.awt.Color(96, 108, 56));
         settingsHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        settingsHeader.setText("Settings");
+        settingsHeader.setText("SETTINGS");
+        settingsHeader.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 108, 56)));
+        getContentPane().add(settingsHeader);
+        settingsHeader.setBounds(30, 320, 400, 30);
 
-        currencyLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
+        currencyLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        currencyLabel.setForeground(new java.awt.Color(96, 108, 56));
         currencyLabel.setText("Current Currency:");
+        getContentPane().add(currencyLabel);
+        currencyLabel.setBounds(30, 360, 130, 20);
 
         currencyCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         currencyCombo.addActionListener(new java.awt.event.ActionListener() {
@@ -294,9 +364,14 @@ private void exportToCSV(File file) {
                 currencyComboActionPerformed(evt);
             }
         });
+        getContentPane().add(currencyCombo);
+        currencyCombo.setBounds(260, 360, 165, 22);
 
-        emailNotifsLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
+        emailNotifsLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        emailNotifsLabel.setForeground(new java.awt.Color(96, 108, 56));
         emailNotifsLabel.setText("Email Notifications:");
+        getContentPane().add(emailNotifsLabel);
+        emailNotifsLabel.setBounds(30, 390, 143, 20);
 
         emailNotificationsCheck.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         emailNotificationsCheck.addActionListener(new java.awt.event.ActionListener() {
@@ -304,9 +379,14 @@ private void exportToCSV(File file) {
                 emailNotificationsCheckActionPerformed(evt);
             }
         });
+        getContentPane().add(emailNotificationsCheck);
+        emailNotificationsCheck.setBounds(260, 390, 165, 22);
 
-        pushNotifsLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
+        pushNotifsLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        pushNotifsLabel.setForeground(new java.awt.Color(96, 108, 56));
         pushNotifsLabel.setText("Push Notifications:");
+        getContentPane().add(pushNotifsLabel);
+        pushNotifsLabel.setBounds(30, 420, 140, 20);
 
         pushNotificationsCheck.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         pushNotificationsCheck.addActionListener(new java.awt.event.ActionListener() {
@@ -314,9 +394,14 @@ private void exportToCSV(File file) {
                 pushNotificationsCheckActionPerformed(evt);
             }
         });
+        getContentPane().add(pushNotificationsCheck);
+        pushNotificationsCheck.setBounds(260, 420, 165, 22);
 
-        smsNotifsLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
+        smsNotifsLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        smsNotifsLabel.setForeground(new java.awt.Color(96, 108, 56));
         smsNotifsLabel.setText("SMS Notifications");
+        getContentPane().add(smsNotifsLabel);
+        smsNotifsLabel.setBounds(30, 450, 131, 20);
 
         smsNotificationsCheck.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         smsNotificationsCheck.addActionListener(new java.awt.event.ActionListener() {
@@ -324,6 +409,8 @@ private void exportToCSV(File file) {
                 smsNotificationsCheckActionPerformed(evt);
             }
         });
+        getContentPane().add(smsNotificationsCheck);
+        smsNotificationsCheck.setBounds(260, 450, 165, 22);
 
         marketingCheck.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         marketingCheck.addActionListener(new java.awt.event.ActionListener() {
@@ -331,187 +418,82 @@ private void exportToCSV(File file) {
                 marketingCheckActionPerformed(evt);
             }
         });
+        getContentPane().add(marketingCheck);
+        marketingCheck.setBounds(260, 480, 165, 22);
 
-        profileSettingsHeader12.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
+        profileSettingsHeader12.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        profileSettingsHeader12.setForeground(new java.awt.Color(96, 108, 56));
         profileSettingsHeader12.setText("Marketing Emails:");
+        getContentPane().add(profileSettingsHeader12);
+        profileSettingsHeader12.setBounds(30, 480, 131, 20);
 
-        menuBtn.setText("Back to Menu");
+        menuBtn.setBackground(new java.awt.Color(96, 108, 56));
+        menuBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        menuBtn.setForeground(new java.awt.Color(255, 255, 255));
+        menuBtn.setText("BACK");
+        menuBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         menuBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(menuBtn);
+        menuBtn.setBounds(350, 70, 80, 30);
 
-        updatecsvBtn.setText("Update");
+        updatecsvBtn.setBackground(new java.awt.Color(96, 108, 56));
+        updatecsvBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        updatecsvBtn.setForeground(new java.awt.Color(255, 255, 255));
+        updatecsvBtn.setText("UPDATE");
+        updatecsvBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         updatecsvBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updatecsvBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(updatecsvBtn);
+        updatecsvBtn.setBounds(260, 520, 165, 23);
 
-        updatecsvLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
+        updatecsvLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        updatecsvLabel.setForeground(new java.awt.Color(96, 108, 56));
         updatecsvLabel.setText("Update CSV:");
+        getContentPane().add(updatecsvLabel);
+        updatecsvLabel.setBounds(30, 520, 89, 20);
 
-        exportDataLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
+        exportDataLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        exportDataLabel.setForeground(new java.awt.Color(96, 108, 56));
         exportDataLabel.setText("Export Data:");
+        getContentPane().add(exportDataLabel);
+        exportDataLabel.setBounds(30, 550, 93, 19);
 
-        exportDataBtn.setText("Export");
+        exportDataBtn.setBackground(new java.awt.Color(96, 108, 56));
+        exportDataBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        exportDataBtn.setForeground(new java.awt.Color(255, 255, 255));
+        exportDataBtn.setText("EXPORT");
+        exportDataBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         exportDataBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exportDataBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(exportDataBtn);
+        exportDataBtn.setBounds(260, 550, 165, 23);
 
-        saveSettingsBtn.setText("Save Account Settings");
+        saveSettingsBtn.setBackground(new java.awt.Color(96, 108, 56));
+        saveSettingsBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        saveSettingsBtn.setForeground(new java.awt.Color(255, 255, 255));
+        saveSettingsBtn.setText("SAVE SETTINGS");
         saveSettingsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveSettingsBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(saveSettingsBtn);
+        saveSettingsBtn.setBounds(30, 590, 150, 30);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(profileInfoHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(settingsHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(saveSettingsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(currencyLabel)
-                            .addComponent(emailNotifsLabel)
-                            .addComponent(pushNotifsLabel)
-                            .addComponent(profileSettingsHeader12)
-                            .addComponent(updatecsvLabel)
-                            .addComponent(exportDataLabel)
-                            .addComponent(smsNotifsLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(exportDataBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(updatecsvBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(marketingCheck, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(smsNotificationsCheck, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(pushNotificationsCheck, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(emailNotificationsCheck, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(currencyCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(25, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(profileSettingsHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(menuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(saveAccDetailsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(emailLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGap(18, 18, 18))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(usernameLabel)
-                                                .addComponent(currPassLabel))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(newPassLabel)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(welcomeLabel)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(usernameDisplayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(52, 52, 52)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(emailField)
-                                    .addComponent(usernameField)
-                                    .addComponent(currentPasswordField)
-                                    .addComponent(newPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(25, 25, 25))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(menuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(profileSettingsHeader))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(welcomeLabel)
-                            .addComponent(usernameDisplayLabel))
-                        .addGap(18, 18, 18)))
-                .addComponent(profileInfoHeader)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(usernameLabel)
-                    .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emailLabel)
-                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(currPassLabel)
-                    .addComponent(currentPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(newPassLabel)
-                    .addComponent(newPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(saveAccDetailsBtn)
-                .addGap(18, 18, 18)
-                .addComponent(settingsHeader)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(currencyLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(emailNotifsLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pushNotifsLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(smsNotifsLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(profileSettingsHeader12))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(currencyCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(emailNotificationsCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pushNotificationsCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(smsNotificationsCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(marketingCheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(updatecsvBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(exportDataBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(updatecsvLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(exportDataLabel)))
-                .addGap(18, 18, 18)
-                .addComponent(saveSettingsBtn)
-                .addGap(70, 70, 70))
-        );
+        profileSettingsHeader.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        profileSettingsHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/profileBG.png"))); // NOI18N
+        getContentPane().add(profileSettingsHeader);
+        profileSettingsHeader.setBounds(0, -30, 460, 720);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -624,7 +606,7 @@ private void exportToCSV(File file) {
     private void updatecsvBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatecsvBtnActionPerformed
         JFileChooser fileChooser = new JFileChooser();
     fileChooser.setDialogTitle("Select CSV File to Import");
-    fileChooser.setFileFilter(new FileNameExtensionFilter("CSV Files", "csv"));
+    fileChooser.setFileFilter(new FileNameExtensionFilter("CSV Files", "csv", "txt"));
     
     int result = fileChooser.showOpenDialog(this);
     if (result == JFileChooser.APPROVE_OPTION) {
@@ -808,6 +790,5 @@ private void exportToCSV(File file) {
     private javax.swing.JLabel usernameDisplayLabel;
     private javax.swing.JTextField usernameField;
     private javax.swing.JLabel usernameLabel;
-    private javax.swing.JLabel welcomeLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,12 +4,11 @@
  */
 package cs203_2.group2.kachingko.dashboard.CreditLimit;
 
-import cs203_2.group2.kachingko.DBConnection;
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
-import cs203_2.group2.kachingko.auth.Session;
+import cs203_2.group2.kachingko.dashboard.DashboardFrame;
 
 /**
  *
@@ -539,7 +538,9 @@ if (utilization < 30) {
     }//GEN-LAST:event_totalUtilizationPercentageActionPerformed
 
     private void dashboardBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardBtnActionPerformed
-        // TODO add your handling code here:
+       DashboardFrame dashboardWindow = new DashboardFrame();
+        dashboardWindow.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_dashboardBtnActionPerformed
 
     /**

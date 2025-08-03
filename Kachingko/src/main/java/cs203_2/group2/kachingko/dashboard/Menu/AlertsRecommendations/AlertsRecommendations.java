@@ -263,7 +263,6 @@ private void generateBudgetRecommendations(java.sql.Connection conn, java.util.L
         alertsHeader = new javax.swing.JLabel();
         alertsHeaderLabel = new javax.swing.JScrollPane();
         alertsList = new javax.swing.JList<>();
-        alertsRecommHeader = new javax.swing.JLabel();
         recommendationsHeaderLabel = new javax.swing.JLabel();
         recommendationsScrollPane = new javax.swing.JScrollPane();
         recommendationsList = new javax.swing.JList<>();
@@ -276,15 +275,20 @@ private void generateBudgetRecommendations(java.sql.Connection conn, java.util.L
         customWarningsList = new javax.swing.JList<>();
         refreshBtn = new javax.swing.JButton();
         warningAmountField = new javax.swing.JTextField();
+        alertsRecommHeader = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(460, 680));
         setMinimumSize(new java.awt.Dimension(460, 680));
         setResizable(false);
         setSize(new java.awt.Dimension(460, 680));
+        getContentPane().setLayout(null);
 
-        alertsHeader.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        alertsHeader.setText("Current Alerts:");
+        alertsHeader.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        alertsHeader.setForeground(new java.awt.Color(55, 74, 34));
+        alertsHeader.setText("CURRENT ALERTS:");
+        getContentPane().add(alertsHeader);
+        alertsHeader.setBounds(20, 110, 170, 19);
 
         alertsList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -293,12 +297,14 @@ private void generateBudgetRecommendations(java.sql.Connection conn, java.util.L
         });
         alertsHeaderLabel.setViewportView(alertsList);
 
-        alertsRecommHeader.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        alertsRecommHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        alertsRecommHeader.setText("Alerts & Recommendations");
+        getContentPane().add(alertsHeaderLabel);
+        alertsHeaderLabel.setBounds(20, 150, 410, 85);
 
-        recommendationsHeaderLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        recommendationsHeaderLabel.setText("Smart Tips:");
+        recommendationsHeaderLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        recommendationsHeaderLabel.setForeground(new java.awt.Color(55, 74, 34));
+        recommendationsHeaderLabel.setText("SMART TIPS:");
+        getContentPane().add(recommendationsHeaderLabel);
+        recommendationsHeaderLabel.setBounds(20, 250, 400, 19);
 
         recommendationsList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -307,27 +313,48 @@ private void generateBudgetRecommendations(java.sql.Connection conn, java.util.L
         });
         recommendationsScrollPane.setViewportView(recommendationsList);
 
-        warningsHeaderLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        warningsHeaderLabel.setText("Custom Warning:");
+        getContentPane().add(recommendationsScrollPane);
+        recommendationsScrollPane.setBounds(20, 280, 410, 85);
 
-        menuBtn.setText("Return to Menu");
+        warningsHeaderLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
+        warningsHeaderLabel.setForeground(new java.awt.Color(55, 74, 34));
+        warningsHeaderLabel.setText("CUSTOM WARNING:");
+        getContentPane().add(warningsHeaderLabel);
+        warningsHeaderLabel.setBounds(20, 380, 400, 26);
+
+        menuBtn.setBackground(new java.awt.Color(55, 74, 34));
+        menuBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        menuBtn.setForeground(new java.awt.Color(255, 255, 255));
+        menuBtn.setText("BACK");
         menuBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(menuBtn);
+        menuBtn.setBounds(320, 80, 110, 40);
 
-        categoryLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 16)); // NOI18N
-        categoryLabel.setText("Category");
+        categoryLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        categoryLabel.setForeground(new java.awt.Color(55, 74, 34));
+        categoryLabel.setText("CATEGORY");
+        getContentPane().add(categoryLabel);
+        categoryLabel.setBounds(20, 410, 69, 40);
 
         warningCategoryCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(warningCategoryCombo);
+        warningCategoryCombo.setBounds(110, 410, 199, 22);
 
-        addWarningBtn.setText("Add Warning");
+        addWarningBtn.setBackground(new java.awt.Color(55, 74, 34));
+        addWarningBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        addWarningBtn.setForeground(new java.awt.Color(255, 255, 255));
+        addWarningBtn.setText("ADD");
         addWarningBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addWarningBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(addWarningBtn);
+        addWarningBtn.setBounds(320, 410, 106, 55);
 
         customWarningsList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -336,85 +363,34 @@ private void generateBudgetRecommendations(java.sql.Connection conn, java.util.L
         });
         customWarningsScrollPane.setViewportView(customWarningsList);
 
-        refreshBtn.setText("Refresh");
+        getContentPane().add(customWarningsScrollPane);
+        customWarningsScrollPane.setBounds(20, 480, 410, 100);
+
+        refreshBtn.setBackground(new java.awt.Color(55, 74, 34));
+        refreshBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        refreshBtn.setForeground(new java.awt.Color(255, 255, 255));
+        refreshBtn.setText("REFRESH");
         refreshBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(refreshBtn);
+        refreshBtn.setBounds(275, 594, 160, 30);
 
         warningAmountField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 warningAmountFieldActionPerformed(evt);
             }
         });
+        getContentPane().add(warningAmountField);
+        warningAmountField.setBounds(110, 440, 199, 22);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(customWarningsScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(alertsHeaderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(25, 25, 25)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(warningsHeaderLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-                                    .addComponent(recommendationsHeaderLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-                                    .addComponent(alertsHeader, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addComponent(recommendationsScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(categoryLabel)
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(warningAmountField)
-                                        .addComponent(warningCategoryCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(addWarningBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(15, 15, 15)
-                            .addComponent(alertsRecommHeader)
-                            .addGap(18, 18, 18)
-                            .addComponent(menuBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(alertsRecommHeader)
-                    .addComponent(menuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addComponent(alertsHeader)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(alertsHeaderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(recommendationsHeaderLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(recommendationsScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(warningsHeaderLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addWarningBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(warningCategoryCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(warningAmountField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(categoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(customWarningsScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
-        );
+        alertsRecommHeader.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        alertsRecommHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        alertsRecommHeader.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/alertsBG.png"))); // NOI18N
+        getContentPane().add(alertsRecommHeader);
+        alertsRecommHeader.setBounds(-10, -10, 470, 680);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
