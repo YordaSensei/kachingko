@@ -149,6 +149,7 @@ public class menu extends javax.swing.JFrame {
         goalsBtn = new javax.swing.JButton();
         notifBtn = new javax.swing.JButton();
         backBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -268,7 +269,9 @@ public class menu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(backBtn);
-        backBtn.setBounds(289, 16, 149, 27);
+        backBtn.setBounds(289, 16, 149, 23);
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 450, 660);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -335,6 +338,7 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JButton expensesBtn;
     private javax.swing.JTable goalTable;
     private javax.swing.JButton goalsBtn;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
