@@ -40,7 +40,7 @@ public class signup extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(62, 83, 39));
         jLabel3.setText("Email");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(90, 340, 47, 24);
+        jLabel3.setBounds(90, 340, 49, 24);
 
         emailField.setFont(new java.awt.Font("DM Sans", 0, 14)); // NOI18N
         emailField.setForeground(new java.awt.Color(62, 83, 39));
@@ -65,7 +65,7 @@ public class signup extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(62, 83, 39));
         jLabel4.setText("Username");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(90, 240, 89, 24);
+        jLabel4.setBounds(90, 240, 90, 24);
 
         signupbtn.setBackground(new java.awt.Color(62, 83, 39));
         signupbtn.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
