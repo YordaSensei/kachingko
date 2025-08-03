@@ -6,6 +6,7 @@ package cs203_2.group2.kachingko.budget_planner;
 
 import cs203_2.group2.kachingko.DBConnection;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,12 +14,12 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class manageCat extends javax.swing.JFrame {
+public class manageExpenses extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(manageCat.class.getName());
-    private int selectedCategoryId = -1;
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(manageExpenses.class.getName());
+    private int selectedExpenseId = -1;
     
-    public manageCat() {
+    public manageExpenses() {
         initComponents();
         setLocationRelativeTo(null);
         
@@ -27,12 +28,17 @@ public class manageCat extends javax.swing.JFrame {
             new String[]{"Category ID", "Category", "Budget", "Total", "Budget Left"}
         ));
         
-        categoryTable.getSelectionModel().addListSelectionListener(event -> {
-            int row = categoryTable.getSelectedRow();
+        expenseTable.setModel(new DefaultTableModel(
+            new Object[][]{},
+            new String[]{"Expense ID", "Expense", "Amount", "Date"}
+        ));
+        
+        expenseTable.getSelectionModel().addListSelectionListener(event -> {
+            int row = expenseTable.getSelectedRow();
             if (row >= 0) {
-                selectedCategoryId = (int) categoryTable.getValueAt(row, 0); // Get ID
-                txtName.setText(categoryTable.getValueAt(row, 1).toString());
-                txtBudget.setText(categoryTable.getValueAt(row, 2).toString());
+                selectedExpenseId = (int) expenseTable.getValueAt(row, 0); // Get ID
+                txtName.setText(expenseTable.getValueAt(row, 1).toString());
+                txtAmount.setText(expenseTable.getValueAt(row, 2).toString());
             }
         });
         
@@ -41,6 +47,10 @@ public class manageCat extends javax.swing.JFrame {
         categoryTable.getColumnModel().getColumn(0).setMinWidth(0);
         categoryTable.getColumnModel().getColumn(0).setMaxWidth(0);
         categoryTable.getColumnModel().getColumn(0).setWidth(0);
+        
+        expenseTable.getColumnModel().getColumn(0).setMinWidth(0);
+        expenseTable.getColumnModel().getColumn(0).setMaxWidth(0);
+        expenseTable.getColumnModel().getColumn(0).setWidth(0);
     }
     
     private void loadCategories() {
@@ -58,7 +68,7 @@ public class manageCat extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery();
             
             if (!rs.isBeforeFirst()) {
-                System.out.println("No categories found for user ID: " + userId);
+                JOptionPane.showMessageDialog(this, "No categories found.");
             }
             
             while (rs.next()) {
@@ -73,6 +83,36 @@ public class manageCat extends javax.swing.JFrame {
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error loading categories: " + e.getMessage());
+        }
+    }
+    
+    private void loadExpenses(int categoryId) {
+        DefaultTableModel model = (DefaultTableModel) expenseTable.getModel();
+        model.setRowCount(0);
+
+        String sql = "SELECT * FROM expenses WHERE category_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, categoryId);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (!rs.isBeforeFirst()) {
+                System.out.println("No expenses found for user ID: " + categoryId);
+            }
+            
+            while (rs.next()) {
+                int expenseId = rs.getInt("expense_id");
+                String name = rs.getString("name");
+                double amount = rs.getDouble("amount");
+                Date date = rs.getDate("date");
+                
+                model.addRow(new Object[]{expenseId, name, amount, date});
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error loading expenses: " + e.getMessage());
         }
     }
     
@@ -124,14 +164,16 @@ public class manageCat extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
         categoryTable = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        expenseTable = new javax.swing.JTable();
         txtName = new javax.swing.JTextField();
         createBtn = new javax.swing.JButton();
         deleteBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtBudget = new javax.swing.JTextField();
+        txtAmount = new javax.swing.JTextField();
         backButton = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
 
@@ -158,7 +200,33 @@ public class manageCat extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(categoryTable);
+        categoryTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                categoryTableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(categoryTable);
+
+        expenseTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Expense", "Amount", "Date"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(expenseTable);
 
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,15 +252,15 @@ public class manageCat extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Category Name:");
+        jLabel2.setText("Expense Name:");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Budget:");
+        jLabel4.setText("Amount:");
 
-        txtBudget.addActionListener(new java.awt.event.ActionListener() {
+        txtAmount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBudgetActionPerformed(evt);
+                txtAmountActionPerformed(evt);
             }
         });
 
@@ -219,8 +287,7 @@ public class manageCat extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(deleteBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,18 +295,24 @@ public class manageCat extends javax.swing.JFrame {
                             .addComponent(txtName))
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtBudget, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtAmount, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(updateBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-                            .addComponent(jLabel4))))
+                            .addComponent(jLabel4)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addContainerGap(10, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -247,7 +320,7 @@ public class manageCat extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -279,37 +352,54 @@ public class manageCat extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNameActionPerformed
 
-    private void txtBudgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBudgetActionPerformed
+    private void txtAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmountActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtBudgetActionPerformed
+    }//GEN-LAST:event_txtAmountActionPerformed
 
     private void createBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBtnActionPerformed
         String name = txtName.getText();
-        String budget = txtBudget.getText();
+        String amountText = txtAmount.getText();
 
-        if (name.isEmpty() || budget.isEmpty()) {
+        int selectedRow = categoryTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a category first.");
+            return;
+        }
+        
+        if (name.isEmpty() || amountText.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.");
             return;
         }
-
+        
+        double amount;
+        try {
+            amount = Double.parseDouble(amountText);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid number for amount.");
+            return;
+        }
+        
+        int categoryId = (int) categoryTable.getValueAt(selectedRow, 0);
+        
         try {
             Connection conn = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/kachingko", "root", "");
 
-            String sql = "INSERT INTO categories (id, name, budget) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO expenses (id, category_id, name, amount, date) VALUES (?, ?, ?, ?, NOW())";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, 2); // Replace with dynamic user ID if available
-            pstmt.setString(2, name);
-            pstmt.setString(3, budget);
+            pstmt.setInt(2, categoryId);
+            pstmt.setString(3, name);
+            pstmt.setDouble(4, amount);
 
             int rows = pstmt.executeUpdate();
             if (rows > 0) {
-                JOptionPane.showMessageDialog(this, "Category created successfully!");
+                JOptionPane.showMessageDialog(this, "Expense created successfully!");
                 
                 txtName.setText("");
-                txtBudget.setText("");
+                txtAmount.setText("");
                 
-                loadCategories();
+                loadExpenses(categoryId);
             }
 
             conn.close();
@@ -328,40 +418,47 @@ public class manageCat extends javax.swing.JFrame {
 
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateBtnActionPerformed
         String name = txtName.getText();
-        String budget = txtBudget.getText();
+        String amountText = txtAmount.getText();
 
-        if (selectedCategoryId == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a customer to update.");
+        if (selectedExpenseId == -1) {
+            JOptionPane.showMessageDialog(this, "Please select an expense to update.");
             return;
         }
 
-        if (name.isEmpty() || budget.isEmpty()) {
+        if (name.isEmpty() || amountText.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please fill in all fields.");
             return;
         }
 
         try {
-            double budgetValue = Double.parseDouble(budget);
+            double amount = Double.parseDouble(amountText);
             
             Connection conn = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/kachingko", "root", "");
-            String sql = "UPDATE categories SET name = ?, budget = ? WHERE category_id = ?";
+            String sql = "UPDATE expenses SET name = ?, amount = ?, date = NOW() WHERE expense_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, name);
-            pstmt.setDouble(2, budgetValue);
-            pstmt.setInt(3, selectedCategoryId);
+            pstmt.setDouble(2, amount);
+            pstmt.setInt(3, selectedExpenseId);
+            
             int rows = pstmt.executeUpdate();
             
             if (rows > 0) {
-                JOptionPane.showMessageDialog(this, "Category updated successfully!");
+                JOptionPane.showMessageDialog(this, "Expense updated successfully!");
                 
                 txtName.setText("");
-                txtBudget.setText("");
-                selectedCategoryId = -1;
+                txtAmount.setText("");
+                selectedExpenseId = -1;
             
-                loadCategories();
+                int selectedCategoryRow = categoryTable.getSelectedRow();
+                if (selectedCategoryRow != -1) {
+                    int categoryId = (int) categoryTable.getValueAt(selectedCategoryRow, 0);
+                    loadExpenses(categoryId); // Refresh only current category
+                }
             }
             conn.close();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid number for amount.");
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
@@ -369,28 +466,32 @@ public class manageCat extends javax.swing.JFrame {
     }//GEN-LAST:event_updateBtnActionPerformed
 
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        if (selectedCategoryId == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a category to delete.");
+        if (selectedExpenseId == -1) {
+            JOptionPane.showMessageDialog(this, "Please select an expense to delete.");
             return;
         }
         
-        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this category?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this expense?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
         
         if (confirm != JOptionPane.YES_OPTION) return;
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/kachingko", "root", "");
-            String sql = "DELETE FROM categories WHERE category_id = ?";
+            String sql = "DELETE FROM expenses WHERE expense_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, selectedCategoryId);
+            pstmt.setInt(1, selectedExpenseId);
             int rows = pstmt.executeUpdate();
             if (rows > 0) {
                 JOptionPane.showMessageDialog(this, "Category deleted successfully!");
                 
                 txtName.setText("");
-                txtBudget.setText("");
-                selectedCategoryId = -1;
+                txtAmount.setText("");
+                selectedExpenseId = -1;
             
-                loadCategories();
+                int selectedCategoryRow = categoryTable.getSelectedRow();
+                if (selectedCategoryRow != -1) {
+                    int categoryId = (int) categoryTable.getValueAt(selectedCategoryRow, 0);
+                    loadExpenses(categoryId); // Reload expenses for the selected category
+                }
             }
             conn.close();
         } catch (Exception e) {
@@ -398,6 +499,14 @@ public class manageCat extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
+
+    private void categoryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categoryTableMouseClicked
+        int selectedRow = categoryTable.getSelectedRow();
+        if (selectedRow != -1) {
+            int categoryId = (int) categoryTable.getValueAt(selectedRow, 0);
+            loadExpenses(categoryId);
+        }
+    }//GEN-LAST:event_categoryTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -421,7 +530,7 @@ public class manageCat extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new manageCat().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new manageExpenses().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -429,11 +538,13 @@ public class manageCat extends javax.swing.JFrame {
     private javax.swing.JTable categoryTable;
     private javax.swing.JButton createBtn;
     private javax.swing.JButton deleteBtn;
+    private javax.swing.JTable expenseTable;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField txtBudget;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField txtAmount;
     private javax.swing.JTextField txtName;
     private javax.swing.JButton updateBtn;
     // End of variables declaration//GEN-END:variables

@@ -18,7 +18,7 @@ public class menu extends javax.swing.JFrame {
         
         categoryTable.setModel(new DefaultTableModel(
             new Object[][]{},
-            new String[]{"Category ID", "Category", "Budget", "Total"}
+            new String[]{"Category ID", "Category", "Budget", "Total", "Budget Left"}
         ));
 
         expenseTable.setModel(new DefaultTableModel(
@@ -55,10 +55,10 @@ public class menu extends javax.swing.JFrame {
                 int categoryId = rs.getInt("category_id");
                 String name = rs.getString("name");
                 double budget = rs.getDouble("budget");
-
                 double totalAmount = getTotalExpenses(categoryId);
+                double currentBudget = getBudgetLeft(categoryId);
                 
-                model.addRow(new Object[]{categoryId, name, budget, totalAmount});
+                model.addRow(new Object[]{categoryId, name, budget, totalAmount, currentBudget});
             }
 
         } catch (SQLException e) {
@@ -92,7 +92,9 @@ public class menu extends javax.swing.JFrame {
     }
     
     private double getTotalExpenses(int categoryId) {
+        double total = 0.0;
         String sql = "SELECT SUM(amount) AS total FROM expenses WHERE category_id = ?";
+        
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -106,7 +108,30 @@ public class menu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error calculating total: " + e.getMessage());
         }
 
-        return 0.0;
+        return total;
+    }
+    
+    private double getBudgetLeft(int categoryId) {
+        double budget = 0.0;
+        double totalExpenses = getTotalExpenses(categoryId);
+
+        String sql = "SELECT budget FROM categories WHERE category_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, categoryId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                budget = rs.getDouble("budget");
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error retrieving budget: " + e.getMessage());
+        }
+
+        return budget - totalExpenses;
     }
 
     @SuppressWarnings("unchecked")
@@ -208,6 +233,11 @@ public class menu extends javax.swing.JFrame {
 
         expensesBtn.setText("Manage Expenses");
         expensesBtn.setToolTipText("");
+        expensesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                expensesBtnActionPerformed(evt);
+            }
+        });
 
         goalsBtn.setText("Manage Goals");
         goalsBtn.setToolTipText("");
@@ -303,6 +333,13 @@ public class menu extends javax.swing.JFrame {
         
         this.setVisible(false);
     }//GEN-LAST:event_backBtnActionPerformed
+
+    private void expensesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expensesBtnActionPerformed
+        manageExpenses expensesWindow = new manageExpenses();
+        expensesWindow.setVisible(true);
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_expensesBtnActionPerformed
 
     /**
      * @param args the command line arguments
