@@ -149,7 +149,6 @@ public class menu extends javax.swing.JFrame {
         goalTable = new javax.swing.JTable();
         expensesBtn = new javax.swing.JButton();
         goalsBtn = new javax.swing.JButton();
-        notifBtn = new javax.swing.JButton();
         backBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -188,7 +187,7 @@ public class menu extends javax.swing.JFrame {
         jScrollPane1.setViewportView(categoryTable);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 120, 426, 130);
+        jScrollPane1.setBounds(10, 110, 426, 140);
 
         expenseTable.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
         expenseTable.setForeground(new java.awt.Color(40, 54, 24));
@@ -223,13 +222,14 @@ public class menu extends javax.swing.JFrame {
         catBtn.setForeground(new java.awt.Color(255, 255, 255));
         catBtn.setText("MANAGE CATEGORIES");
         catBtn.setToolTipText("");
+        catBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         catBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 catBtnActionPerformed(evt);
             }
         });
         getContentPane().add(catBtn);
-        catBtn.setBounds(10, 560, 207, 30);
+        catBtn.setBounds(17, 560, 200, 30);
 
         goalTable.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
         goalTable.setForeground(new java.awt.Color(40, 54, 24));
@@ -264,39 +264,28 @@ public class menu extends javax.swing.JFrame {
         expensesBtn.setForeground(new java.awt.Color(255, 255, 255));
         expensesBtn.setText("MANAGE EXPENSES");
         expensesBtn.setToolTipText("");
+        expensesBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         expensesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 expensesBtnActionPerformed(evt);
             }
         });
         getContentPane().add(expensesBtn);
-        expensesBtn.setBounds(230, 560, 207, 30);
+        expensesBtn.setBounds(230, 560, 200, 30);
 
         goalsBtn.setBackground(new java.awt.Color(40, 54, 24));
         goalsBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
         goalsBtn.setForeground(new java.awt.Color(255, 255, 255));
         goalsBtn.setText("LOG GOALS");
         goalsBtn.setToolTipText("");
+        goalsBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         goalsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 goalsBtnActionPerformed(evt);
             }
         });
         getContentPane().add(goalsBtn);
-        goalsBtn.setBounds(10, 600, 207, 30);
-
-        notifBtn.setBackground(new java.awt.Color(40, 54, 24));
-        notifBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
-        notifBtn.setForeground(new java.awt.Color(255, 255, 255));
-        notifBtn.setText("NOTIFICATIONS");
-        notifBtn.setToolTipText("");
-        notifBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                notifBtnActionPerformed(evt);
-            }
-        });
-        getContentPane().add(notifBtn);
-        notifBtn.setBounds(230, 600, 207, 30);
+        goalsBtn.setBounds(17, 600, 200, 30);
 
         backBtn.setBackground(new java.awt.Color(40, 54, 24));
         backBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
@@ -310,9 +299,9 @@ public class menu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(backBtn);
-        backBtn.setBounds(279, 80, 150, 23);
+        backBtn.setBounds(230, 600, 200, 30);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/budgetplanner.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/budgetBG.png"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 450, 660);
 
@@ -348,10 +337,6 @@ public class menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_categoryTableMouseClicked
 
-
-    private void notifBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notifBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_notifBtnActionPerformed
 
     private void goalsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goalsBtnActionPerformed
         logGoals logWindow = new logGoals();
@@ -398,6 +383,5 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JButton notifBtn;
     // End of variables declaration//GEN-END:variables
 }
