@@ -5,6 +5,7 @@
 package cs203_2.group2.kachingko.budget_planner;
 
 import cs203_2.group2.kachingko.DBConnection;
+import cs203_2.group2.kachingko.auth.Session;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -64,8 +65,7 @@ public class manageExpenses extends javax.swing.JFrame {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            int userId = 2;
-            stmt.setInt(1, userId);
+            stmt.setInt(1, Session.currentUserId); 
 
             ResultSet rs = stmt.executeQuery();
             
@@ -370,7 +370,7 @@ public class manageExpenses extends javax.swing.JFrame {
 
             String sql = "INSERT INTO expenses (id, category_id, name, amount, date) VALUES (?, ?, ?, ?, NOW())";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, 2); // Replace with dynamic user ID if available
+            pstmt.setInt(1, Session.currentUserId);
             pstmt.setInt(2, categoryId);
             pstmt.setString(3, name);
             pstmt.setDouble(4, amount);
@@ -436,7 +436,7 @@ public class manageExpenses extends javax.swing.JFrame {
                 int selectedCategoryRow = categoryTable.getSelectedRow();
                 if (selectedCategoryRow != -1) {
                     int categoryId = (int) categoryTable.getValueAt(selectedCategoryRow, 0);
-                    loadExpenses(categoryId); // Refresh only current category
+                    loadExpenses(categoryId);
                 }
             }
             conn.close();
@@ -464,7 +464,7 @@ public class manageExpenses extends javax.swing.JFrame {
             pstmt.setInt(1, selectedExpenseId);
             int rows = pstmt.executeUpdate();
             if (rows > 0) {
-                JOptionPane.showMessageDialog(this, "Category deleted successfully!");
+                JOptionPane.showMessageDialog(this, "Expense deleted successfully!");
                 
                 txtName.setText("");
                 txtAmount.setText("");

@@ -2,6 +2,7 @@ package cs203_2.group2.kachingko.budget_planner;
 
 import cs203_2.group2.kachingko.dashboard.DashboardFrame;
 import cs203_2.group2.kachingko.DBConnection;
+import cs203_2.group2.kachingko.auth.Session;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.*;
@@ -28,7 +29,17 @@ public class menu extends javax.swing.JFrame {
             new String[]{"Expense", "Amount", "Date"}
         ));
 
+        goalTable.setModel(new DefaultTableModel(
+            new Object[][]{},
+            new String[]{"Goal ID", "Goal", "Target Amount", "Current Amount"}
+        ));
+        
+        loadGoals();
         loadCategories();
+        
+        goalTable.getColumnModel().getColumn(0).setMinWidth(0);
+        goalTable.getColumnModel().getColumn(0).setMaxWidth(0);
+        goalTable.getColumnModel().getColumn(0).setWidth(0);
         
         categoryTable.getColumnModel().getColumn(0).setMinWidth(0);
         categoryTable.getColumnModel().getColumn(0).setMaxWidth(0);
@@ -42,16 +53,11 @@ public class menu extends javax.swing.JFrame {
         String sql = "SELECT * FROM categories WHERE id = ?";
 
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            int userId = 2;
-            stmt.setInt(1, userId);
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, Session.currentUserId); 
 
             ResultSet rs = stmt.executeQuery();
-            
-            if (!rs.isBeforeFirst()) {
-                System.out.println("No categories found for user ID: " + userId);
-            }
             
             while (rs.next()) {
                 int categoryId = rs.getInt("category_id");
@@ -90,6 +96,37 @@ public class menu extends javax.swing.JFrame {
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error loading expenses: " + e.getMessage());
+        }
+    }
+    
+    private void loadGoals() {
+        DefaultTableModel model = (DefaultTableModel) goalTable.getModel();
+        model.setRowCount(0);
+
+        String sql = "SELECT * FROM goals WHERE id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, Session.currentUserId); 
+
+            ResultSet rs = stmt.executeQuery();
+            
+            if (!rs.isBeforeFirst()) {
+                System.out.println("No categories found for user ID: " + Session.currentUserId);
+            }
+
+            while (rs.next()) {
+                int goalId = rs.getInt("goal_id");
+                String name = rs.getString("name");
+                double target = rs.getDouble("target_amount");
+                double current = rs.getDouble("current_amount");
+
+                model.addRow(new Object[]{goalId, name, target, current});
+            }
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error loading goals: " + e.getMessage());
         }
     }
     

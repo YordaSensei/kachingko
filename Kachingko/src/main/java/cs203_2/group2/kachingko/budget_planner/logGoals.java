@@ -5,6 +5,7 @@
 package cs203_2.group2.kachingko.budget_planner;
 
 import cs203_2.group2.kachingko.DBConnection;
+import cs203_2.group2.kachingko.auth.Session;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -62,8 +63,8 @@ public class logGoals extends javax.swing.JFrame {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            int userId = 2; // or dynamically passed
-            stmt.setInt(1, userId);
+            stmt.setInt(1, Session.currentUserId); 
+
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {

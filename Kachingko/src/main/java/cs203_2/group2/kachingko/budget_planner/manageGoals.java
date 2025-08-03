@@ -5,6 +5,7 @@
 package cs203_2.group2.kachingko.budget_planner;
 
 import cs203_2.group2.kachingko.DBConnection;
+import cs203_2.group2.kachingko.auth.Session;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -52,10 +53,10 @@ public class manageGoals extends javax.swing.JFrame {
         String sql = "SELECT * FROM goals WHERE id = ?";
 
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            int userId = 2; // or dynamically passed
-            stmt.setInt(1, userId);
+            stmt.setInt(1, Session.currentUserId); 
+
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -64,7 +65,6 @@ public class manageGoals extends javax.swing.JFrame {
                 double target = rs.getDouble("target_amount");
                 double current = rs.getDouble("current_amount");
 
-                // You can leave addedAmount and date blank initially
                 model.addRow(new Object[]{goalId, name, target, current});
             }
 
@@ -95,17 +95,17 @@ public class manageGoals extends javax.swing.JFrame {
 
         goalsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Goal", "Target", "Current", "Added", "Date"
+                "Goal", "Target", "Current"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -218,7 +218,7 @@ public class manageGoals extends javax.swing.JFrame {
 
             String sql = "INSERT INTO goals (id, name, target_amount, current_amount) VALUES (?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, 2); // Replace with dynamic user ID if available
+            pstmt.setInt(1, Session.currentUserId);
             pstmt.setString(2, name);
             pstmt.setDouble(3, target);
             pstmt.setDouble(4, current);

@@ -5,6 +5,7 @@
 package cs203_2.group2.kachingko.budget_planner;
 
 import cs203_2.group2.kachingko.DBConnection;
+import cs203_2.group2.kachingko.auth.Session;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -54,14 +55,9 @@ public class manageCat extends javax.swing.JFrame {
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            int userId = 2;
-            stmt.setInt(1, userId);
+            stmt.setInt(1, Session.currentUserId); 
 
-            ResultSet rs = stmt.executeQuery();
-            
-            if (!rs.isBeforeFirst()) {
-                System.out.println("No categories found for user ID: " + userId);
-            }
+            ResultSet rs = stmt.executeQuery();      
             
             while (rs.next()) {
                 int categoryId = rs.getInt("category_id");
@@ -285,7 +281,7 @@ public class manageCat extends javax.swing.JFrame {
 
             String sql = "INSERT INTO categories (id, name, budget) VALUES (?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, 2); // Replace with dynamic user ID if available
+            pstmt.setInt(1, Session.currentUserId);
             pstmt.setString(2, name);
             pstmt.setString(3, budget);
 
@@ -318,7 +314,7 @@ public class manageCat extends javax.swing.JFrame {
         String budget = txtBudget.getText();
 
         if (selectedCategoryId == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a customer to update.");
+            JOptionPane.showMessageDialog(this, "Please select a category to update.");
             return;
         }
 
