@@ -6,12 +6,14 @@ package cs203_2.group2.kachingko.dashboard;
 import cs203_2.group2.kachingko.dashboard.SpendingTrendline.SpendingTrendline;
 import cs203_2.group2.kachingko.budget_planner.menu;
 import cs203_2.group2.kachingko.auth.Session;
+import cs203_2.group2.kachingko.monthlySpendingOverview.MonthlySpendingOverview;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import cs203_2.group2.kachingko.DBConnection;
+
 /**
  *
  * @author jeffm
@@ -160,7 +162,9 @@ public class DashboardFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void monthlySpendingBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthlySpendingBtnActionPerformed
-        // TODO add your handling code here:
+            MonthlySpendingOverview spendingWindow = new MonthlySpendingOverview();
+            spendingWindow.setVisible(true);
+            this.setVisible(false);
     }//GEN-LAST:event_monthlySpendingBtnActionPerformed
 
     private void menuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBtnActionPerformed
