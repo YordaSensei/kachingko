@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import cs203_2.group2.kachingko.auth.Session;
+import cs203_2.group2.kachingko.auth.login;
 /**
  *
  * @author ADMIN
@@ -38,10 +39,10 @@ public class Menu extends javax.swing.JFrame {
         alertRecommsBtn = new javax.swing.JButton();
         profileSettingsBtn = new javax.swing.JButton();
         dashboardBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(460, 680));
         setMinimumSize(new java.awt.Dimension(460, 680));
         setResizable(false);
         setSize(new java.awt.Dimension(460, 680));
@@ -58,7 +59,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(alertRecommsBtn);
-        alertRecommsBtn.setBounds(90, 280, 280, 60);
+        alertRecommsBtn.setBounds(100, 280, 260, 40);
 
         profileSettingsBtn.setBackground(new java.awt.Color(55, 74, 34));
         profileSettingsBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
@@ -71,7 +72,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(profileSettingsBtn);
-        profileSettingsBtn.setBounds(90, 350, 280, 60);
+        profileSettingsBtn.setBounds(100, 330, 260, 40);
 
         dashboardBtn.setBackground(new java.awt.Color(96, 108, 56));
         dashboardBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
@@ -84,6 +85,19 @@ public class Menu extends javax.swing.JFrame {
         });
         getContentPane().add(dashboardBtn);
         dashboardBtn.setBounds(150, 590, 150, 30);
+
+        jButton1.setBackground(new java.awt.Color(55, 74, 34));
+        jButton1.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("LOG OUT");
+        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(100, 383, 260, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menuBG.png"))); // NOI18N
         getContentPane().add(jLabel1);
@@ -135,6 +149,16 @@ public class Menu extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_dashboardBtnActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Session.currentUserId = -1;
+        
+        JOptionPane.showMessageDialog(this, "You have been logged out");
+        
+        this.dispose();
+        
+        new login().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -173,6 +197,7 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton alertRecommsBtn;
     private javax.swing.JButton dashboardBtn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton profileSettingsBtn;
     // End of variables declaration//GEN-END:variables

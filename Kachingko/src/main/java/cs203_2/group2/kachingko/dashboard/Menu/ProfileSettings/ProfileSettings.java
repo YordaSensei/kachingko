@@ -282,13 +282,15 @@ private void exportToCSV(File file) {
         getContentPane().add(usernameLabel);
         usernameLabel.setBounds(30, 160, 77, 19);
 
+        usernameField.setForeground(new java.awt.Color(96, 108, 56));
+        usernameField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 108, 56)));
         usernameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usernameFieldActionPerformed(evt);
             }
         });
         getContentPane().add(usernameField);
-        usernameField.setBounds(230, 160, 200, 22);
+        usernameField.setBounds(230, 160, 200, 18);
 
         emailLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         emailLabel.setForeground(new java.awt.Color(96, 108, 56));
@@ -296,13 +298,15 @@ private void exportToCSV(File file) {
         getContentPane().add(emailLabel);
         emailLabel.setBounds(30, 190, 60, 20);
 
+        emailField.setForeground(new java.awt.Color(96, 108, 56));
+        emailField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 108, 56)));
         emailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailFieldActionPerformed(evt);
             }
         });
         getContentPane().add(emailField);
-        emailField.setBounds(230, 190, 200, 22);
+        emailField.setBounds(230, 190, 200, 18);
 
         currPassLabel.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
         currPassLabel.setForeground(new java.awt.Color(96, 108, 56));
@@ -316,21 +320,25 @@ private void exportToCSV(File file) {
         getContentPane().add(newPassLabel);
         newPassLabel.setBounds(30, 250, 111, 19);
 
+        currentPasswordField.setForeground(new java.awt.Color(96, 108, 56));
+        currentPasswordField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 108, 56)));
         currentPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 currentPasswordFieldActionPerformed(evt);
             }
         });
         getContentPane().add(currentPasswordField);
-        currentPasswordField.setBounds(230, 220, 200, 22);
+        currentPasswordField.setBounds(230, 220, 200, 18);
 
+        newPasswordField.setForeground(new java.awt.Color(96, 108, 56));
+        newPasswordField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 108, 56)));
         newPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newPasswordFieldActionPerformed(evt);
             }
         });
         getContentPane().add(newPasswordField);
-        newPasswordField.setBounds(230, 250, 200, 22);
+        newPasswordField.setBounds(230, 250, 200, 18);
 
         saveAccDetailsBtn.setBackground(new java.awt.Color(96, 108, 56));
         saveAccDetailsBtn.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
@@ -358,7 +366,9 @@ private void exportToCSV(File file) {
         getContentPane().add(currencyLabel);
         currencyLabel.setBounds(30, 360, 130, 20);
 
-        currencyCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        currencyCombo.setForeground(new java.awt.Color(96, 108, 56));
+        currencyCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Philippine Peso", "US Dollar ", "Euro", "Japanese Yen", "Pound Sterling" }));
+        currencyCombo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 108, 56)));
         currencyCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 currencyComboActionPerformed(evt);
@@ -373,7 +383,9 @@ private void exportToCSV(File file) {
         getContentPane().add(emailNotifsLabel);
         emailNotifsLabel.setBounds(30, 390, 143, 20);
 
+        emailNotificationsCheck.setForeground(new java.awt.Color(96, 108, 56));
         emailNotificationsCheck.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        emailNotificationsCheck.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 108, 56)));
         emailNotificationsCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailNotificationsCheckActionPerformed(evt);
@@ -388,7 +400,9 @@ private void exportToCSV(File file) {
         getContentPane().add(pushNotifsLabel);
         pushNotifsLabel.setBounds(30, 420, 140, 20);
 
+        pushNotificationsCheck.setForeground(new java.awt.Color(96, 108, 56));
         pushNotificationsCheck.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        pushNotificationsCheck.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 108, 56)));
         pushNotificationsCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pushNotificationsCheckActionPerformed(evt);
@@ -403,7 +417,9 @@ private void exportToCSV(File file) {
         getContentPane().add(smsNotifsLabel);
         smsNotifsLabel.setBounds(30, 450, 131, 20);
 
+        smsNotificationsCheck.setForeground(new java.awt.Color(96, 108, 56));
         smsNotificationsCheck.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        smsNotificationsCheck.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 108, 56)));
         smsNotificationsCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 smsNotificationsCheckActionPerformed(evt);
@@ -412,7 +428,9 @@ private void exportToCSV(File file) {
         getContentPane().add(smsNotificationsCheck);
         smsNotificationsCheck.setBounds(260, 450, 165, 22);
 
+        marketingCheck.setForeground(new java.awt.Color(96, 108, 56));
         marketingCheck.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        marketingCheck.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(96, 108, 56)));
         marketingCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 marketingCheckActionPerformed(evt);
