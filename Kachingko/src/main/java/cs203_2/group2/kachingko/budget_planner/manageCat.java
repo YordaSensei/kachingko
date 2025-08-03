@@ -135,6 +135,7 @@ public class manageCat extends javax.swing.JFrame {
         txtBudget = new javax.swing.JTextField();
         backButton = new javax.swing.JButton();
         updateBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(450, 655));
@@ -162,75 +163,101 @@ public class manageCat extends javax.swing.JFrame {
         jScrollPane1.setViewportView(categoryTable);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 20, 430, 407);
+        jScrollPane1.setBounds(20, 117, 410, 330);
 
+        txtName.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        txtName.setForeground(new java.awt.Color(55, 74, 34));
+        txtName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
             }
         });
         getContentPane().add(txtName);
-        txtName.setBounds(10, 470, 211, 37);
+        txtName.setBounds(21, 490, 200, 37);
 
-        createBtn.setText("Create");
+        createBtn.setBackground(new java.awt.Color(55, 74, 34));
+        createBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        createBtn.setForeground(new java.awt.Color(255, 255, 255));
+        createBtn.setText("CREATE");
         createBtn.setToolTipText("");
+        createBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         createBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createBtnActionPerformed(evt);
             }
         });
         getContentPane().add(createBtn);
-        createBtn.setBounds(10, 520, 211, 50);
+        createBtn.setBounds(21, 540, 200, 40);
 
-        deleteBtn.setText("Delete");
+        deleteBtn.setBackground(new java.awt.Color(55, 74, 34));
+        deleteBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        deleteBtn.setForeground(new java.awt.Color(255, 255, 255));
+        deleteBtn.setText("DELETE");
         deleteBtn.setToolTipText("");
+        deleteBtn.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
             }
         });
         getContentPane().add(deleteBtn);
-        deleteBtn.setBounds(230, 520, 211, 50);
+        deleteBtn.setBounds(230, 540, 200, 40);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Category Name:");
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(55, 74, 34));
+        jLabel2.setText("CATEGORY NAME:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 440, 99, 20);
+        jLabel2.setBounds(20, 460, 140, 19);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Budget:");
+        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(55, 74, 34));
+        jLabel4.setText("BUDGET:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(230, 440, 47, 20);
+        jLabel4.setBounds(230, 460, 70, 19);
 
+        txtBudget.setFont(new java.awt.Font("DM Sans", 0, 12)); // NOI18N
+        txtBudget.setForeground(new java.awt.Color(55, 74, 34));
+        txtBudget.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(55, 74, 34)));
         txtBudget.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBudgetActionPerformed(evt);
             }
         });
         getContentPane().add(txtBudget);
-        txtBudget.setBounds(230, 470, 210, 37);
+        txtBudget.setBounds(230, 490, 200, 37);
 
-        backButton.setText("Back");
+        backButton.setBackground(new java.awt.Color(96, 108, 56));
+        backButton.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        backButton.setForeground(new java.awt.Color(255, 255, 255));
+        backButton.setText("BACK");
         backButton.setToolTipText("");
+        backButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
             }
         });
         getContentPane().add(backButton);
-        backButton.setBounds(230, 580, 210, 50);
+        backButton.setBounds(230, 590, 200, 40);
 
-        updateBtn.setText("Update");
+        updateBtn.setBackground(new java.awt.Color(55, 74, 34));
+        updateBtn.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        updateBtn.setForeground(new java.awt.Color(255, 255, 255));
+        updateBtn.setText("UPDATE");
         updateBtn.setToolTipText("");
+        updateBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateBtnActionPerformed(evt);
             }
         });
         getContentPane().add(updateBtn);
-        updateBtn.setBounds(10, 580, 210, 50);
+        updateBtn.setBounds(20, 590, 200, 40);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/categoriesBG.png"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 450, 660);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -389,6 +416,7 @@ public class manageCat extends javax.swing.JFrame {
     private javax.swing.JTable categoryTable;
     private javax.swing.JButton createBtn;
     private javax.swing.JButton deleteBtn;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
