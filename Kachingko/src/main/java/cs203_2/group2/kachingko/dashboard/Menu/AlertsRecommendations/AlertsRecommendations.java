@@ -420,10 +420,19 @@ private void generateBudgetRecommendations(java.sql.Connection conn, java.util.L
     }// </editor-fold>//GEN-END:initComponents
 
     private void addWarningBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWarningBtnActionPerformed
-    System.out.println("=== DEBUGGING SESSION ===");
+     System.out.println("=== DEBUGGING SESSION ===");
     System.out.println("Session.currentUserId: " + cs203_2.group2.kachingko.auth.Session.currentUserId);
-        String category = (String) warningCategoryCombo.getSelectedItem();
-        String amountText = warningAmountField.getText().trim();
+    
+    // Check if user is logged in
+    if (cs203_2.group2.kachingko.auth.Session.currentUserId == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this,
+            "You must be logged in to add custom warnings.",
+            "Not Logged In", javax.swing.JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    
+    String category = (String) warningCategoryCombo.getSelectedItem();
+    String amountText = warningAmountField.getText().trim();
     
     if (category == null || amountText.isEmpty()) {
         javax.swing.JOptionPane.showMessageDialog(this,
@@ -440,21 +449,64 @@ private void generateBudgetRecommendations(java.sql.Connection conn, java.util.L
         
         // Save to database
         try (java.sql.Connection conn = cs203_2.group2.kachingko.DBConnection.getConnection()) {
-            String query = "INSERT INTO custom_warnings (user_id, category, warning_amount) VALUES (?, ?, ?)";
-            java.sql.PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1, cs203_2.group2.kachingko.auth.Session.currentUserId);
-            stmt.setString(2, category);
-            stmt.setDouble(3, amount);
-            stmt.executeUpdate();
+            // Optional: Verify the user exists in the database
+            String userCheckQuery = "SELECT id FROM users WHERE id = ?";
+            try (java.sql.PreparedStatement userStmt = conn.prepareStatement(userCheckQuery)) {
+                userStmt.setInt(1, cs203_2.group2.kachingko.auth.Session.currentUserId);
+                java.sql.ResultSet userRs = userStmt.executeQuery();
+                
+                if (!userRs.next()) {
+                    javax.swing.JOptionPane.showMessageDialog(this,
+                        "Current user not found in database. Please log in again.",
+                        "User Validation Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
             
-            javax.swing.JOptionPane.showMessageDialog(this,
-                "Custom warning added for " + category + " at ₱" + df.format(amount),
-                "Warning Added", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            // Check if warning already exists for this user and category
+            String checkQuery = "SELECT warning_id FROM custom_warnings WHERE user_id = ? AND category = ?";
+            try (java.sql.PreparedStatement checkStmt = conn.prepareStatement(checkQuery)) {
+                checkStmt.setInt(1, cs203_2.group2.kachingko.auth.Session.currentUserId);
+                checkStmt.setString(2, category);
+                java.sql.ResultSet checkRs = checkStmt.executeQuery();
+                
+                if (checkRs.next()) {
+                    // Update existing warning
+                    String updateQuery = "UPDATE custom_warnings SET warning_amount = ? WHERE user_id = ? AND category = ?";
+                    try (java.sql.PreparedStatement updateStmt = conn.prepareStatement(updateQuery)) {
+                        updateStmt.setDouble(1, amount);
+                        updateStmt.setInt(2, cs203_2.group2.kachingko.auth.Session.currentUserId);
+                        updateStmt.setString(3, category);
+                        updateStmt.executeUpdate();
+                        
+                        javax.swing.JOptionPane.showMessageDialog(this,
+                            "Custom warning updated for " + category + " to ₱" + df.format(amount),
+                            "Warning Updated", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    }
+                } else {
+                    // Insert new warning
+                    String insertQuery = "INSERT INTO custom_warnings (user_id, category, warning_amount) VALUES (?, ?, ?)";
+                    try (java.sql.PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
+                        insertStmt.setInt(1, cs203_2.group2.kachingko.auth.Session.currentUserId);
+                        insertStmt.setString(2, category);
+                        insertStmt.setDouble(3, amount);
+                        insertStmt.executeUpdate();
+                        
+                        javax.swing.JOptionPane.showMessageDialog(this,
+                            "Custom warning added for " + category + " at ₱" + df.format(amount),
+                            "Warning Added", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+            }
             
             warningAmountField.setText("");
             loadCustomWarnings();
             
         } catch (java.sql.SQLException ex) {
+            System.err.println("SQL Error: " + ex.getMessage());
+            System.err.println("SQL State: " + ex.getSQLState());
+            System.err.println("Error Code: " + ex.getErrorCode());
+            
             javax.swing.JOptionPane.showMessageDialog(this,
                 "Error saving warning: " + ex.getMessage(),
                 "Database Error", javax.swing.JOptionPane.ERROR_MESSAGE);
