@@ -204,7 +204,7 @@
           <Font name="Segoe UI Black" size="18" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Administrator\Desktop\Programming\kachingko\Kachingko\src\main\resources\images\trendlineBG.png"/>
+          <Image iconType="3" name="/images/trendlineBG.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>

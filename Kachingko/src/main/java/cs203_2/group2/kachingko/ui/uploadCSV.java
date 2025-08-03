@@ -56,7 +56,7 @@ public class uploadCSV extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(160, 390, 140, 27);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Administrator\\Desktop\\Programming\\kachingko\\Kachingko\\src\\main\\resources\\images\\upload.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/upload.png"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, -30, 460, 710);
 
