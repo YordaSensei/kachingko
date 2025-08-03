@@ -58,9 +58,9 @@ public class MonthlySpendingOverview extends javax.swing.JFrame {
                 ResultSet rs = stmt.executeQuery();
                 if (rs.next()) {
                     totalSpent = rs.getDouble("total");
-                    totalSpentMonth.setText(String.format("₱%.2f", totalSpent));
+                    totalSpentMonth.setText(String.format("%.2f", totalSpent));
                 } else {
-                    totalSpentMonth.setText("₱0.00");
+                    totalSpentMonth.setText("0.00");
                 }
             }
 
@@ -187,7 +187,7 @@ public class MonthlySpendingOverview extends javax.swing.JFrame {
 
         totalSpentMonth.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         totalSpentMonth.setForeground(new java.awt.Color(96, 108, 56));
-        totalSpentMonth.setText("₱0.00");
+        totalSpentMonth.setText("0.00");
 
         javax.swing.GroupLayout totalSpentLayout = new javax.swing.GroupLayout(totalSpent);
         totalSpent.setLayout(totalSpentLayout);
@@ -198,7 +198,7 @@ public class MonthlySpendingOverview extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(32, 32, 32)
                 .addComponent(totalSpentMonth)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         totalSpentLayout.setVerticalGroup(
             totalSpentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
